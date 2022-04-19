@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class Clientes {
     @Id
     @Column(name="id_cliente")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int id_cliente;
     public String razon_social;
     public String telefono;
