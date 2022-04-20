@@ -7,21 +7,11 @@ import com.example.CRUD.Repositories.ClientesRepo;
 import com.example.CRUD.Repositories.LocalidadesRepo;
 import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
-@EnableJpaRepositories(basePackages={"example.CRUD.Repositories.ClientesRepository"})
-@Configuration
-@EnableAutoConfiguration
-@EntityScan(basePackageClasses=Clientes.class)
-@ComponentScan(basePackages={"example.CRUD.Repositories.ClientesRepository"})
 public class ClientesService {
     @Autowired
     public ClientesRepo clientesRepo;

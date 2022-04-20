@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @SpringBootApplication
 @EnableJpaRepositories
-@EntityScan({"com.example.CRUD.Models.Clientes"})
-@Service("com.example.CRUD.Services.ClientesService")
 public class CrudApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(CrudApplication.class, args);
