@@ -1,0 +1,181 @@
+<div class="separator"></div>
+
+<button class="btn btn-primary addButton" data-bs-toggle="modal" data-bs-target="#insertModal">
+    <i class="fa fa-plus"></i>
+    <span> Agregar Cliente </span>
+</button>
+
+<div class="shadow tableMark border border-light">
+    <h1 class="tableTitle text-decoration-underline">
+        Tabla de clientes
+    </h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Razon Social</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Localidad</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let data of clientes">
+            <tr>
+                <td scope="row">{{ data.id_cliente }}</td>
+                <td>{{ data.razon_social }}</td>
+                <td>{{ data.telefono }}</td>
+                <td>{{ data.localidad }}</td>
+                <td>
+                    <button class="btn btn-danger btnBorrar" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                    (click)="deleteOpen(data.id_cliente)">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                    <button class="btn btn-warning btnModificar" data-bs-toggle="modal" data-bs-target="#editModal"
+                    (click)="modifyOpen(data.id_cliente, data.razon_social, data.telefono, data.cp)">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="separator"></div>
+
+
+
+  
+<!-- Modal de carga de clientes -->
+<div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"> Cargar clientes</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
+        <a *ngIf="errorTypes === 1">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            Falta completar el campo de nombre!
+        </a>
+        <a *ngIf="errorTypes === 2">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            Falta completar el campo de teléfono!
+        </a>
+    </div>
+
+    <form (ngSubmit)="insertCliente()">
+        <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Nombre del cliente</label>
+                    <input type="text" class="form-control" placeholder="Nombre" name="nombre" [(ngModel)]="nombre">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Telefono</label>
+                    <input type="text" class="form-control" placeholder="Teléfono" name="telefono" [(ngModel)]="telefono">
+                </div>
+
+                <select class="form-select mb-3" [(ngModel)]="cp" name="cp">
+                    <option *ngFor="let loc of localidades" value="{{ loc.cp }}">
+                        {{ loc.localidad }}
+                    </option>
+                </select>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar </button>
+            <button type="button" class="btn btn-primary" type="submit"> Cargar
+                <i class="fa fa-plus"></i>
+            </button>
+        </div>
+    </form>
+    </div>
+    
+</div>
+</div>
+
+<!-- Modal de modificar de clientes -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"> Modificar clientes</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
+            <a *ngIf="errorTypes === 1">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                Falta completar el campo de nombre!
+            </a>
+            <a *ngIf="errorTypes === 2">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                Falta completar el campo de teléfono!
+            </a>
+        </div>
+    
+        <form (ngSubmit)="modifyCliente()">
+            <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Nombre del cliente</label>
+                        <input type="text" class="form-control" placeholder="Nombre" name="nombre" [(ngModel)]="nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Telefono</label>
+                        <input type="text" class="form-control" placeholder="Teléfono" name="telefono" [(ngModel)]="telefono">
+                    </div>
+    
+                    <select class="form-select mb-3" [(ngModel)]="cp" name="cp">
+                        <option *ngFor="let loc of localidades" value="{{ loc.cp }}">
+                            {{ loc.localidad }}
+                        </option>
+                    </select>
+    
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar </button>
+                <button type="button" class="btn btn-warning" type="submit"> 
+                    Modificar
+                    <i class="fa fa-pencil"></i>
+                </button>
+            </div>
+        </form>
+        </div>
+        
+    </div>
+    </div>
+
+    <!-- Modal de borrar de clientes -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"> Seguro que quiere borrar? </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
+            <a *ngIf="errorTypes === 1">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                Falta completar el campo de nombre!
+            </a>
+            <a *ngIf="errorTypes === 2">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                Falta completar el campo de teléfono!
+            </a>
+        </div>
+    
+        <form (ngSubmit)="deleteCliente()">
+            <div class="modal-body">
+                    <h3>Seguro que lo quiere borrar?</h3>
+    
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar </button>
+                <button type="button" class="btn btn-danger" type="submit"> Eliminar
+                    <i class="fa fa-trash"></i>
+                </button>
+            </div>
+        </form>
+        </div>
+        
+    </div>
+    </div>

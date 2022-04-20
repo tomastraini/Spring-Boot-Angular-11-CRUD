@@ -6,12 +6,15 @@ import com.example.CRUD.Services.ClientesService;
 import com.sun.istack.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/Clientes")
+@CrossOrigin(origins = "http://localhost:4200")
+@Service("com.example.CRUD.Services.ClientesService")
 public class ClientesController {
     public ClientesService srv;
 
