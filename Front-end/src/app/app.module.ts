@@ -11,6 +11,10 @@ import { PageNotFoundComponent } from './searchbar/page-not-found/page-not-found
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AboutComponent } from './searchbar/about/about.component';
+import { ClientesFilterPipe } from './Pipes/ClientesFilterPipe';
+import { LocalidadesFilterPipe } from './Pipes/LocalidadesFilterPipe';
+import { AbmprovinciasComponent } from './searchbar/abmprovincias/abmprovincias.component';
+import { ProvinciasFilterPipe } from './Pipes/ProvinciasFilterPipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,11 @@ import { AboutComponent } from './searchbar/about/about.component';
     LocalidadesComponent,
     SearchbarComponent,
     PageNotFoundComponent,
-    AboutComponent
+    AboutComponent,
+    ClientesFilterPipe,
+    LocalidadesFilterPipe,
+    AbmprovinciasComponent,
+    ProvinciasFilterPipe
   ],
   imports: [
     BrowserModule,

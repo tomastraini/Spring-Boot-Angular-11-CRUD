@@ -6,6 +6,7 @@ import { LocalidadesComponent } from './searchbar/localidades/localidades.compon
 import { MenuComponent } from './searchbar/menu/menu.component';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { AboutComponent } from './searchbar/about/about.component';
+import { AbmprovinciasComponent } from './searchbar/abmprovincias/abmprovincias.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
       {
         path: 'abmlocalidades',
         component: LocalidadesComponent
+      },
+      {
+        path: "abmprovincias",
+        component: AbmprovinciasComponent
       },
       {
         path: 'about',

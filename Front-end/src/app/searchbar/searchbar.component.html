@@ -20,6 +20,7 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                   <li><a class="dropdown-item" (click)="goAbmClientes()"> ABM Clientes </a></li>
                   <li><a class="dropdown-item" (click)="goAbmLocalidades()"> ABM Localidades </a></li>
+                  <li><a class="dropdown-item" (click)="goAbmProvincias()"> ABM Provincias </a></li>
                 </ul>
               </div>
             <li class="nav-item">
@@ -27,7 +28,7 @@
             </li>
         </ul>
     
-        <form class="searchVideos d-flex" (ngSubmit)="buscar()">
+        <div class="searchVideos d-flex">
             <input class="form-control me-2"   placeholder="Buscar..."
             name="busquedavalue" 
             mdbInput
@@ -36,7 +37,7 @@
             
             <button class="btn btn-outline-danger" type="submit">Buscar</button>
             
-        </form>
+        </div>
     
         </div>
     </div>
@@ -44,6 +45,7 @@
 
     <app-menu *ngIf="view !== null && view == ''"></app-menu>
     <app-about *ngIf="view !== null && view == 'about'"></app-about>
-    <app-abmclientes *ngIf="view !== null && view == 'abmclientes'"></app-abmclientes>
-    <app-localidades *ngIf="view !== null && view == 'abmlocalidades'"></app-localidades>
+    <app-abmclientes *ngIf="view !== null && view == 'abmclientes'" [busquedavalue]="busquedavalue"></app-abmclientes>
+    <app-localidades *ngIf="view !== null && view == 'abmlocalidades'" [busquedavalue]="busquedavalue"></app-localidades>
+    <app-abmprovincias *ngIf="view !== null && view == 'abmprovincias'" [busquedavalue]="busquedavalue"></app-abmprovincias>
     <app-page-not-found *ngIf="view !== null && view == 'pagenotfound'"></app-page-not-found>

@@ -19,7 +19,7 @@
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
-        <tbody *ngFor="let data of clientes">
+        <tbody *ngFor="let data of clientes | clientesFilter: busquedavalue">
             <tr>
                 <td scope="row">{{ data.id_cliente }}</td>
                 <td>{{ data.razon_social }}</td>

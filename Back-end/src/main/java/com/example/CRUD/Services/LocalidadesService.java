@@ -54,7 +54,7 @@ public class LocalidadesService {
         if(loc.cp == 0){ return null; }
         Localidades loctoModify = localidadesRepo.findAll()
                 .stream().filter(x -> x.cp == loc.cp).findFirst().get();
-
+        if(loctoModify == null) { return null; }
         loctoModify = loc;
         localidadesRepo.save(loctoModify);
         return loc;
