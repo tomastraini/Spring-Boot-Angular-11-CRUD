@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 
 @Component({
@@ -19,6 +19,7 @@ export class LocalidadesComponent implements OnInit {
   provincias: any;
   
   errorTypes = 0;
+  @Input() busquedavalue: any;
 
   ngOnInit(): void
   {

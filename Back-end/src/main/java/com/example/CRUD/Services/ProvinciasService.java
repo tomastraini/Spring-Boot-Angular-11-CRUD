@@ -20,4 +20,29 @@ public class ProvinciasService {
     {
         return repo.findAll();
     }
+
+    public Provincias insertProvincias(Provincias prov)
+    {
+        repo.save(prov);
+        return prov;
+    }
+
+    public Provincias modifyProvincias(Provincias prov)
+    {
+        Provincias provToModify = repo.findAll()
+                .stream().filter(x -> x.id_provincia == prov.id_provincia).findFirst().get();
+        if(provToModify == null) { return  null; }
+        provToModify = prov;
+        repo.save(provToModify);
+        return prov;
+    }
+
+    public Provincias removeProvincias(long id)
+    {
+        Provincias prov = repo.findAll()
+                .stream().filter(x -> x.id_provincia == id)
+                .findFirst().orElseThrow();
+        repo.delete(prov);
+        return prov;
+    }
 }

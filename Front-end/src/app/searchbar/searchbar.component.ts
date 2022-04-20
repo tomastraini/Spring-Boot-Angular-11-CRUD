@@ -38,6 +38,10 @@ export class SearchbarComponent implements OnInit {
     {
       this.view = 'abmlocalidades';
     }
+    else if (this.router.url.includes('abmprovincias'))
+    {
+      this.view = 'abmprovincias';
+    }
     else
     {
       this.view = 'pagenotfound';
@@ -59,8 +63,9 @@ export class SearchbarComponent implements OnInit {
     window.location.href = '/abmlocalidades';
   }
 
-  buscar(): void
+  goAbmProvincias(): void
   {
-
+    window.location.href = '/abmprovincias';
   }
+
 }

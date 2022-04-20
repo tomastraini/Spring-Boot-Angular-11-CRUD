@@ -1,35 +1,33 @@
 <div class="separator"></div>
 
-<button class="btn btn-primary addButton" data-bs-toggle="modal" data-bs-target="#insertModal">
+<button class="btn btn-primary addButton" data-bs-toggle="modal" data-bs-target="#insertModal" (click)="insertOpen()">
     <i class="fa fa-plus"></i>
     <span> Agregar localidad </span>
 </button>
 
 <div class="shadow tableMark border border-light">
     <h1 class="tableTitle text-decoration-underline">
-        Tabla de localidades
+        Tabla de provincias
     </h1>
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Localidad</th>
                 <th scope="col">Provincia</th>
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
-        <tbody *ngFor="let data of localidades | localidadesFilter: busquedavalue">
+        <tbody *ngFor="let data of provincias | provinciasFilter: busquedavalue">
             <tr>
-                <td scope="row">{{ data.cp }}</td>
-                <td>{{ data.localidad }}</td>
+                <td scope="row">{{ data.id_provincia }}</td>
                 <td>{{ data.provincia }}</td>
                 <td>
                     <button class="btn btn-danger btnBorrar" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                    (click)="deleteOpen(data.cp)">
+                    (click)="deleteOpen(data.id_provincia)">
                         <i class="fa fa-trash"></i>
                     </button>
                     <button class="btn btn-warning btnModificar" data-bs-toggle="modal" data-bs-target="#editModal"
-                    (click)="modifyOpen(data.cp, data.id_provincia, data.localidad)">
+                    (click)="modifyOpen(data.id_provincia, data.provincia)">
                         <i class="fa fa-pencil"></i>
                     </button>
                 </td>
@@ -40,51 +38,33 @@
 
 <div class="separator"></div>
 
-<!-- Modal de carga de localidades -->
+<!-- Modal de carga de provincias -->
 <div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
+
     <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"> Cargar localidades </h5>
+        <h5 class="modal-title" id="exampleModalLabel"> Cargar provincia </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     
     <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
         <a *ngIf="errorTypes === 1">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            Falta completar el campo de código postal!
-        </a>
-        <a *ngIf="errorTypes === 2">
-            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            Falta completar el campo de provincia!
-        </a>
-        <a *ngIf="errorTypes === 3">
-            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            Falta completar el campo de localidad!
+            Falta completar el campo de Provincia!
         </a>
     </div>
 
-    <form (ngSubmit)="insertLocalidad()">
+    <form (ngSubmit)="insertProvincia()">
         <div class="modal-body">
                 <div class="mb-3">
-                    <label class="form-label">Código postal</label>
-                    <input type="text" class="form-control" placeholder="Código postal" name="cp" [(ngModel)]="cp">
+                    <label class="form-label">Nombre de la provincia</label>
+                    <input type="text" class="form-control" placeholder="Provincia" name="provincia"
+                    [(ngModel)]="provincia">
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Nombre de la Localidad</label>
-                    <input type="text" class="form-control" placeholder="Localidad" name="localidad" [(ngModel)]="localidad">
-                </div>
-
-
-                <select class="form-select mb-3" [(ngModel)]="id_provincia" name="id_provincia">
-                    <option *ngFor="let pro of provincias" value="{{ pro.id_provincia }}">
-                        {{ pro.provincia }}
-                    </option>
-                </select>
-
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar </button>
+            <button type="button" class="btn btn-secondary" id="cerrarModalBTN" #closeModal data-bs-dismiss="modal"> Cerrar </button>
             <button type="button" class="btn btn-primary" type="submit"> Cargar
                 <i class="fa fa-plus"></i>
             </button>
@@ -95,51 +75,34 @@
 </div>
 </div>
 
-<!-- Modal de modificación de localidades -->
+<!-- Modal de modificación de provincias -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
     <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"> Modificar localidades </h5>
+        <h5 class="modal-title" id="exampleModalLabel"> Modificar provincia </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     
     <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
         <a *ngIf="errorTypes === 1">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            Falta completar el campo de código postal!
-        </a>
-        <a *ngIf="errorTypes === 2">
-            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            Falta completar el campo de localidad!
-        </a>
-        <a *ngIf="errorTypes === 3">
-            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            Falta completar el campo de provincia!
+            Falta completar el campo de código provincia!
         </a>
     </div>
 
-    <form (ngSubmit)="modifyLocalidad()">
+    <form (ngSubmit)="modifyProvincia()">
         <div class="modal-body">
                 <div class="mb-3">
-                    <label class="form-label">Código postal</label>
-                    <input type="text" class="form-control" placeholder="Código postal" name="cp" [(ngModel)]="cp">
+                    <label class="form-label">Nombre de la provincia</label>
+                    <input type="text" class="form-control" placeholder="Provincia" name="provincia"
+                    id="editProvincia"
+                    [(ngModel)]="provincia">
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Nombre de la Localidad</label>
-                    <input type="text" class="form-control" placeholder="Localidad" name="localidad" [(ngModel)]="localidad">
-                </div>
-
-
-                <select class="form-select mb-3" [(ngModel)]="id_provincia" name="id_provincia">
-                    <option *ngFor="let pro of provincias" value="{{ pro.id_provincia }}">
-                        {{ pro.provincia }}
-                    </option>
-                </select>
 
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar </button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cerrarModalBTNM"> Cerrar </button>
             <button type="button" class="btn btn-warning" type="submit"> 
                 Modificar
                     <i class="fa fa-pencil"></i>
@@ -151,7 +114,7 @@
 </div>
 </div>
 
-<!-- Modal de eliminación de localidades -->
+<!-- Modal de eliminación de provincias -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -160,13 +123,13 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
-        <form (ngSubmit)="deleteCliente()">
+        <form (ngSubmit)="deleteProvincia()">
             <div class="modal-body">
                     <h3>Seguro que lo quiere borrar?</h3>
     
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cerrarModalBTNE"> Cerrar </button>
                 <button type="button" class="btn btn-danger" type="submit"> Eliminar
                     <i class="fa fa-trash"></i>
                 </button>

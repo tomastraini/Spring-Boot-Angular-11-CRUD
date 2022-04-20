@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 
 @Component({
@@ -17,6 +17,7 @@ export class AbmclientesComponent implements OnInit {
   telefono = '';
   cp = 0;
   errorTypes = 0;
+  @Input() busquedavalue: any;
 
   ngOnInit(): void
   {
