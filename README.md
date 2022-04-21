@@ -2,8 +2,11 @@
 Project made with Spring Boot, Hibernate and SQL Server as database manager.
 
 <br>
+
 ---
+
 <b> It contains by now: </b>
+
 - JWT Authentication with tokens connected with database.
 - Database file
 - Clients CRUD
