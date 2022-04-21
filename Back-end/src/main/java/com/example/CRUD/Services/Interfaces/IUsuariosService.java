@@ -7,4 +7,5 @@ import java.util.List;
 public interface IUsuariosService {
     public List<Usuarios> getUsuarios();
     public Usuarios insertUsuarios(Usuarios users);
-}
+    public Usuarios getUsuario(String username);
+    }
