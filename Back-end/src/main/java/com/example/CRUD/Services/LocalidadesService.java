@@ -6,6 +6,7 @@ import com.example.CRUD.Models.Localidades;
 import com.example.CRUD.Models.Provincias;
 import com.example.CRUD.Repositories.LocalidadesRepo;
 import com.example.CRUD.Repositories.ProvinciasRepo;
+import com.example.CRUD.Services.Interfaces.ILocalidadesService;
 import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class LocalidadesService {
+public class LocalidadesService implements ILocalidadesService {
     @Autowired
     public LocalidadesRepo localidadesRepo;
     @Autowired

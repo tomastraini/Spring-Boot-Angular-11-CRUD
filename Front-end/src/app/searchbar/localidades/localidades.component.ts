@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 
@@ -23,7 +23,12 @@ export class LocalidadesComponent implements OnInit {
 
   ngOnInit(): void
   {
-    this.http.get(this.appComponent.apiUrl + 'Localidades').subscribe(data => {
+    this.http.get(this.appComponent.apiUrl + 'Localidades',
+    {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+      })
+    }).subscribe(data => {
       this.localidades = data;
     });
     this.http.get(this.appComponent.apiUrl + 'Provincias').subscribe(data => {
@@ -70,7 +75,11 @@ export class LocalidadesComponent implements OnInit {
       cp: this.cp,
       id_provincia: this.id_provincia,
       localidad: this.localidad
-    }, {observe: 'response'}).subscribe(data => {
+    }, {observe: 'response',
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+      })
+      }).subscribe(data => {
       if (data.status == 200)
       {
         window.location.reload();
@@ -103,7 +112,10 @@ export class LocalidadesComponent implements OnInit {
       cp: this.cp,
       localidad: this.localidad,
       id_provincia: this.id_provincia
-    }, {observe: 'response'}).subscribe(data => {
+    }, {observe: 'response',
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+      })}).subscribe(data => {
       if (data.status == 200)
       {
         window.location.reload();
@@ -116,7 +128,10 @@ export class LocalidadesComponent implements OnInit {
 
   deleteCliente(): void
   {
-    this.http.delete(this.appComponent.apiUrl + 'Localidades/' + this.cp, {observe: 'response'}).subscribe(data => {
+    this.http.delete(this.appComponent.apiUrl + 'Localidades/' + this.cp, {observe: 'response',
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+      })}).subscribe(data => {
       if (data.status == 200)
       {
         window.location.reload();

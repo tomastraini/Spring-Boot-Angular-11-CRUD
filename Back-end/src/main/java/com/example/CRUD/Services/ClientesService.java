@@ -5,6 +5,7 @@ import com.example.CRUD.Models.Clientes;
 import com.example.CRUD.Models.Localidades;
 import com.example.CRUD.Repositories.ClientesRepo;
 import com.example.CRUD.Repositories.LocalidadesRepo;
+import com.example.CRUD.Services.Interfaces.IClientesService;
 import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class ClientesService {
+public class ClientesService implements IClientesService {
     @Autowired
     public ClientesRepo clientesRepo;
     @Autowired

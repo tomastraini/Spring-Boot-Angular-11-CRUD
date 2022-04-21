@@ -1,0 +1,23 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+      <h2 class="active">  Iniciar sesión  </h2>
+  
+      <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
+        <a *ngIf="errorTypes === 1">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            Ususario o contraseña incorrectos!
+        </a>
+    </div>
+      
+      <form (ngSubmit)="login($event.target)">
+        <h6 name = "indicatorl" id="indicatorl" style="color:red;"> </h6>
+        <input type="text" class="fadeIn second" placeholder="Usuario" name="user" [(ngModel)]="user">
+
+        <input type="password" class="fadeIn third" name="password" placeholder="Contraseña" [(ngModel)]="password">
+
+        <input type="submit" style="cursor: pointer;" class="fadeIn fourth" value="Iniciar sesión">
+
+        <button type="button" class="btn btn-danger"  onclick="history.back()" style="position: absolute; top:10; left:10;">Volver</button>
+      </form>
+    </div>
+</div>  

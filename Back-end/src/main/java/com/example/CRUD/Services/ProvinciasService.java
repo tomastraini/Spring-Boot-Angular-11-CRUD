@@ -2,13 +2,14 @@ package com.example.CRUD.Services;
 
 import com.example.CRUD.Models.Provincias;
 import com.example.CRUD.Repositories.ProvinciasRepo;
+import com.example.CRUD.Services.Interfaces.IProvinciasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ProvinciasService {
+public class ProvinciasService implements IProvinciasService {
     @Autowired
     public ProvinciasRepo repo;
 

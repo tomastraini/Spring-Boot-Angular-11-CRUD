@@ -3,6 +3,7 @@ package com.example.CRUD.Controllers;
 import com.example.CRUD.DTOs.ClientesDTO;
 import com.example.CRUD.Models.Clientes;
 import com.example.CRUD.Services.ClientesService;
+import com.example.CRUD.Services.Interfaces.IClientesService;
 import com.sun.istack.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +15,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/Clientes")
 @CrossOrigin(origins = "http://localhost:4200")
-@Service("com.example.CRUD.Services.ClientesService")
 public class ClientesController {
-    public ClientesService srv;
+    public IClientesService srv;
 
-    public ClientesController(ClientesService srv)
+    public ClientesController(IClientesService srv)
     {
         this.srv = srv;
     }

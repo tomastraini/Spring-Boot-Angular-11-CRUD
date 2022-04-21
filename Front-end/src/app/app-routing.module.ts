@@ -7,8 +7,13 @@ import { MenuComponent } from './searchbar/menu/menu.component';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { AboutComponent } from './searchbar/about/about.component';
 import { AbmprovinciasComponent } from './searchbar/abmprovincias/abmprovincias.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent
+  },
   {
     path: '',
     component: SearchbarComponent,

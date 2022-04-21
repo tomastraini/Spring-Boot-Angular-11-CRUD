@@ -4,6 +4,7 @@ import com.example.CRUD.DTOs.LocalidadesDTO;
 import com.example.CRUD.Models.Clientes;
 import com.example.CRUD.Models.Localidades;
 import com.example.CRUD.Services.ClientesService;
+import com.example.CRUD.Services.Interfaces.ILocalidadesService;
 import com.example.CRUD.Services.LocalidadesService;
 import com.sun.istack.NotNull;
 import org.springframework.http.HttpStatus;
@@ -16,9 +17,9 @@ import java.util.List;
 @RequestMapping("/Localidades")
 @CrossOrigin(origins = "http://localhost:4200")
 public class LocalidadesController {
-    public LocalidadesService srv;
+    public ILocalidadesService srv;
 
-    public LocalidadesController(LocalidadesService srv)
+    public LocalidadesController(ILocalidadesService srv)
     {
         this.srv = srv;
     }

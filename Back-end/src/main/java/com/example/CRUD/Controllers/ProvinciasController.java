@@ -2,6 +2,7 @@ package com.example.CRUD.Controllers;
 
 import com.example.CRUD.Models.Clientes;
 import com.example.CRUD.Models.Provincias;
+import com.example.CRUD.Services.Interfaces.IProvinciasService;
 import com.example.CRUD.Services.LocalidadesService;
 import com.example.CRUD.Services.ProvinciasService;
 import com.sun.istack.NotNull;
@@ -16,9 +17,9 @@ import java.util.List;
 @RequestMapping("/Provincias")
 @CrossOrigin(origins = "http://localhost:4200")
 public class ProvinciasController {
-    public ProvinciasService srv;
+    public IProvinciasService srv;
 
-    public ProvinciasController(ProvinciasService srv)
+    public ProvinciasController(IProvinciasService srv)
     {
         this.srv = srv;
     }

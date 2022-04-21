@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 
@@ -19,7 +19,13 @@ export class AbmprovinciasComponent implements OnInit {
   errorTypes = 0;
 
   ngOnInit(): void {
-    this.http.get<any[]>(this.appComponent.apiUrl + 'Provincias').subscribe(data => {
+    let headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+    });
+    this.http.get<any[]>(this.appComponent.apiUrl + 'Provincias',
+    {
+      headers: headers
+    }).subscribe(data => {
       this.provincias = data;
     });
   }
@@ -54,6 +60,12 @@ export class AbmprovinciasComponent implements OnInit {
     this.http.post(this.appComponent.apiUrl + 'Provincias', {
       id_provincia: id_max + 1,
       provincia: this.provincia
+    },
+    {
+      observe: 'response',
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+      })
     }).subscribe(data => {
       this.provincias.push(data);
     });
@@ -67,6 +79,12 @@ export class AbmprovinciasComponent implements OnInit {
     this.http.put<any>(this.appComponent.apiUrl + 'Provincias', {
       id_provincia: this.id_provincia,
       provincia: this.provincia
+    },
+    {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+      })
+
     }).subscribe(data => {
       this.response = data;
       this.provincias.forEach(element => {
@@ -83,7 +101,14 @@ export class AbmprovinciasComponent implements OnInit {
 
   deleteProvincia(): void
   {
-    this.http.delete<any>(this.appComponent.apiUrl + 'Provincias/' + this.id_provincia).subscribe(data => {
+    this.http.delete<any>(this.appComponent.apiUrl + 'Provincias/' + this.id_provincia,
+    {
+      observe: 'response',
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+      })
+    }
+    ).subscribe(data => {
       this.response = data;
       this.provincias.forEach(element => {
         if (element.id_provincia == this.response.id_provincia)
