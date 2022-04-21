@@ -22,10 +22,7 @@ export class AbmclientesComponent implements OnInit {
   ngOnInit(): void
   {
     let headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': 'Content-Type',
-      'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+      'Authorization': 'Bearer ' + sessionStorage.getItem('token')
     });
     
     this.http.get(this.appComponent.apiUrl + 'Clientes', { headers: headers }).subscribe(data => {
@@ -74,7 +71,10 @@ export class AbmclientesComponent implements OnInit {
       telefono: this.telefono,
       cp: this.cp
     }, {
-      observe: 'response'
+      observe: 'response',
+      headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+      })
     }).subscribe(data => {
       if(data.status === 200)
       {
@@ -91,7 +91,10 @@ export class AbmclientesComponent implements OnInit {
   deleteCliente(): void
   {
     this.http.delete(this.appComponent.apiUrl + 'Clientes/' + this.id, {
-      observe: 'response'
+      observe: 'response',
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+        })
     }).subscribe(data => {
       if(data.status === 200)
       {

@@ -18,6 +18,10 @@ export class SearchbarComponent implements OnInit {
 
   ngOnInit(): void
   {
+    if(sessionStorage.getItem('token') === null || sessionStorage.getItem('token') === undefined)
+    {
+        window.location.href = '/login';
+    }
     if (this.router.url === '/')
     {
       this.view = '';
@@ -66,6 +70,12 @@ export class SearchbarComponent implements OnInit {
   goAbmProvincias(): void
   {
     window.location.href = '/abmprovincias';
+  }
+
+  cerrarSession(): void
+  {
+    sessionStorage.clear();
+    window.location.href = '/login';
   }
 
 }
