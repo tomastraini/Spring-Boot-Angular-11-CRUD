@@ -1,6 +1,13 @@
 # SpringBootProject
 Project made with Spring Boot, Hibernate and SQL Server as database manager.
-Link to use it: https://springbootangular11crudfront.herokuapp.com/
+
+<br>
+
+Link to use it: https://springbootangular11crudfront.herokuapp.com/login
+
+- User: admin
+- Password: 123
+
 <br>
 
 ---
