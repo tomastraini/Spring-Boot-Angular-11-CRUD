@@ -42,7 +42,7 @@ public class ProvinciasService implements IProvinciasService {
     {
         Provincias prov = repo.findAll()
                 .stream().filter(x -> x.id_provincia == id)
-                .findFirst().orElseThrow();
+                .findFirst().get();
         repo.delete(prov);
         return prov;
     }

@@ -46,6 +46,10 @@ export class SearchbarComponent implements OnInit {
     {
       this.view = 'abmprovincias';
     }
+    else if (this.router.url.includes('abmproveedores'))
+    {
+      this.view = 'abmproveedores';
+    }
     else
     {
       this.view = 'pagenotfound';
@@ -70,6 +74,11 @@ export class SearchbarComponent implements OnInit {
   goAbmProvincias(): void
   {
     window.location.href = '/abmprovincias';
+  }
+
+  goAbmProveedores(): void
+  {
+    window.location.href = '/abmproveedores';
   }
 
   cerrarSession(): void

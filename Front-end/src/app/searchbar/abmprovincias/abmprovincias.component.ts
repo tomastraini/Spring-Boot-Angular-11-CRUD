@@ -67,7 +67,7 @@ export class AbmprovinciasComponent implements OnInit {
         'Authorization': 'Bearer ' + sessionStorage.getItem('token')
       })
     }).subscribe(data => {
-      this.provincias.push(data);
+      window.location.reload();
     });
     document.getElementById("cerrarModalBTN")?.click();
     this.provincia = null;
@@ -90,7 +90,7 @@ export class AbmprovinciasComponent implements OnInit {
       this.provincias.forEach(element => {
         if (element.id_provincia == this.response.id_provincia)
         {
-          element.provincia = data.provincia;
+          window.location.reload();
         }
     });
     });
@@ -113,7 +113,7 @@ export class AbmprovinciasComponent implements OnInit {
       this.provincias.forEach(element => {
         if (element.id_provincia == this.response.id_provincia)
         {
-          this.provincias.splice(this.provincias.indexOf(element), 1);
+          window.location.reload();
         }
         });
       });

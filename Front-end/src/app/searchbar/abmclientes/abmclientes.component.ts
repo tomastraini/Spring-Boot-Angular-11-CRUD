@@ -45,7 +45,10 @@ export class AbmclientesComponent implements OnInit {
       telefono: this.telefono,
       cp: this.cp
     }, {
-      observe: 'response'
+      observe: 'response',
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+      })
     }
     ).subscribe(data => {
       if(data.status === 200)

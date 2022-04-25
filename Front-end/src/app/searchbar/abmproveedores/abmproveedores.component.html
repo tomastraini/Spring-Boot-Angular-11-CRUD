@@ -1,15 +1,15 @@
 <div class="separator"> 
-    CRUD de clientes
+    CRUD de proveedores
 </div>
 
 <button class="btn btn-primary addButton" data-bs-toggle="modal" data-bs-target="#insertModal">
     <i class="fa fa-plus"></i>
-    <span> Agregar Cliente </span>
+    <span> Agregar proveedor </span>
 </button>
 
 <div class="shadow tableMark border border-light">
     <h1 class="tableTitle text-decoration-underline">
-        Tabla de clientes
+        Tabla de proveedores
     </h1>
     <table class="table">
         <thead>
@@ -21,19 +21,19 @@
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
-        <tbody *ngFor="let data of clientes | clientesFilter: busquedavalue">
+        <tbody *ngFor="let data of proveedores | proveedoresFilter: busquedavalue">
             <tr>
-                <td scope="row">{{ data.id_cliente }}</td>
-                <td>{{ data.razon_social }}</td>
-                <td>{{ data.telefono }}</td>
+                <td scope="row">{{ data.id_proveedor }}</td>
+                <td>{{ data.razon_social_proveedor }}</td>
+                <td>{{ data.telefono_proveedor }}</td>
                 <td>{{ data.localidad }}</td>
                 <td>
                     <button class="btn btn-danger btnBorrar" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                    (click)="deleteOpen(data.id_cliente)">
+                    (click)="deleteOpen(data.id_proveedor)">
                         <i class="fa fa-trash"></i>
                     </button>
                     <button class="btn btn-warning btnModificar" data-bs-toggle="modal" data-bs-target="#editModal"
-                    (click)="modifyOpen(data.id_cliente, data.razon_social, data.telefono, data.cp)">
+                    (click)="modifyOpen(data.id_proveedor, data.razon_social_proveedor, data.telefono_proveedor, data.cp)">
                         <i class="fa fa-pencil"></i>
                     </button>
                 </td>
@@ -47,12 +47,12 @@
 
 
   
-<!-- Modal de carga de clientes -->
+<!-- Modal de carga de proveedores -->
 <div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
     <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"> Cargar clientes</h5>
+        <h5 class="modal-title" id="exampleModalLabel"> Cargar proveedor</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
@@ -66,10 +66,10 @@
         </a>
     </div>
 
-    <form (ngSubmit)="insertCliente()">
+    <form (ngSubmit)="insertProveedor()">
         <div class="modal-body">
                 <div class="mb-3">
-                    <label class="form-label">Nombre del cliente</label>
+                    <label class="form-label">Nombre del proveedor</label>
                     <input type="text" class="form-control" placeholder="Nombre" name="nombre" [(ngModel)]="nombre">
                 </div>
                 <div class="mb-3">
@@ -96,12 +96,12 @@
 </div>
 </div>
 
-<!-- Modal de modificar de clientes -->
+<!-- Modal de modificar de proveedores -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"> Modificar clientes</h5>
+            <h5 class="modal-title" id="exampleModalLabel"> Modificar proveedores</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
@@ -115,10 +115,10 @@
             </a>
         </div>
     
-        <form (ngSubmit)="modifyCliente()">
+        <form (ngSubmit)="modifyProveedor()">
             <div class="modal-body">
                     <div class="mb-3">
-                        <label class="form-label">Nombre del cliente</label>
+                        <label class="form-label">Nombre del proveedores</label>
                         <input type="text" class="form-control" placeholder="Nombre" name="nombre" [(ngModel)]="nombre">
                     </div>
                     <div class="mb-3">
@@ -146,7 +146,7 @@
     </div>
     </div>
 
-    <!-- Modal de borrar de clientes -->
+    <!-- Modal de borrar de proveedores -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -165,7 +165,7 @@
             </a>
         </div>
     
-        <form (ngSubmit)="deleteCliente()">
+        <form (ngSubmit)="deleteProveedor()">
             <div class="modal-body">
                     <h3>Seguro que lo quiere borrar?</h3>
     

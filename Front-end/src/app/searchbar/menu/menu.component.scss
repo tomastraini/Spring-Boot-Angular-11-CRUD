@@ -2,6 +2,142 @@
 {
     margin-top: 2%;
     text-align: center;
-    margin-bottom: 50%;
+    margin-bottom: 2%;
     font-family: 'Open Sans', sans-serif;
+    color: white;
+}
+
+.opinions
+{
+    margin-top: 10%;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+}
+
+.opinionsForm
+{
+    margin-top: 2%;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    border-radius: 1%;
+    max-width: 50%;
+    margin-left: 25%;
+}
+
+.send
+{
+    margin-left: -92.5%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    color: white;
+}
+
+.farBottom
+{
+    margin-bottom: 11.7%;
+    color: white;
+}
+
+.comment{
+    width:400px;
+    height:80px;
+    margin:10px auto;
+    background:black;
+    border-radius:5px;
+    margin-left: 5%;
+    margin-right: 51%;    
+  }
+  
+
+  .comment .username{
+    float:left;
+    color:#212121;
+    margin:15px 0px 0px 5px;
+    padding:0px;
+  }
+  
+  .comment .username:hover{
+    color:white;
+  }
+  
+  
+  .comment .user-comment{
+    margin:0px;
+    padding:0px;
+  }
+  
+  .comment .user-comment p{
+    margin:0px;
+    padding:0px;
+    position:relative;
+    font-size:12px;
+    color:white;
+    top:35px;
+    left:-36px;
+  }
+  
+  .comment .user-comment span{
+    color:white;
+    font-size:13px;
+    margin:0px;
+    padding:0px;
+    position:relative;
+    left:75px;
+    top:-13px;
+  }
+  
+  .comment .user-comment span:hover{
+    color:#616161;
+  }
+
+  #ds p{
+    font-size:12px;
+    color:white;
+    opacity:0.6;
+  }
+  
+  #ds p:hover{
+    cursor:pointer;
+    opacity:1.0;
+  }
+
+  .title
+{
+    font-family: 'Open Sans', sans-serif;
+    text-align: left;
+    margin-left: 5%;
+}
+
+.description
+{
+    font-family: 'Open Sans', sans-serif;
+    text-align: left;
+    margin-left: 5%;
+}
+.description-div
+{
+    margin-left: 5%;
+    margin-right: 51%;
+}
+
+
+.profile-image-img
+{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.comment .profile-image{
+  float:left;
+  width:60px;
+  height:60px;
+  margin:6px 0px 0px 6px;
+  border-radius:300px;
+}
+
+.comment .profile-image:hover{
+  opacity:0.6;
 }

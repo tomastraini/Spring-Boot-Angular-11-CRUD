@@ -8,6 +8,7 @@ import { SearchbarComponent } from './searchbar/searchbar.component';
 import { AboutComponent } from './searchbar/about/about.component';
 import { AbmprovinciasComponent } from './searchbar/abmprovincias/abmprovincias.component';
 import { LoginComponent } from './login/login.component';
+import { AbmproveedoresComponent } from './searchbar/abmproveedores/abmproveedores.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
       {
         path: 'about',
         component: AboutComponent
+      },
+      {
+        path: 'abmproveedores',
+        component: AbmproveedoresComponent
       }
     ]
   },
