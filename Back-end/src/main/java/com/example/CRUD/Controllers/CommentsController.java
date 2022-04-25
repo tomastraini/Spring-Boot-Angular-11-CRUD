@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/Comments")
 @CrossOrigin()
@@ -14,6 +16,12 @@ public class CommentsController {
 
     public CommentsController(ICommentsService srv) {
         this.srv = srv;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Comments>> getComments()
+    {
+        return new ResponseEntity<>(srv.getComments(), HttpStatus.OK);
     }
 
     @PostMapping

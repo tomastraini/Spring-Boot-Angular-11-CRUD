@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class CommentsService implements ICommentsService {
@@ -16,6 +17,11 @@ public class CommentsService implements ICommentsService {
 
     public CommentsService(CommentsRepo repo) {
         this.repo = repo;
+    }
+
+    @Override
+    public List<Comments> getComments() {
+        return repo.findAll();
     }
 
     @Override

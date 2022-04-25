@@ -21,6 +21,7 @@
                   <li><a class="dropdown-item" (click)="goAbmClientes()"> ABM Clientes </a></li>
                   <li><a class="dropdown-item" (click)="goAbmLocalidades()"> ABM Localidades </a></li>
                   <li><a class="dropdown-item" (click)="goAbmProvincias()"> ABM Provincias </a></li>
+                  <li><a class="dropdown-item" (click)="goAbmProveedores()"> ABM Proveedores </a></li>
                 </ul>
               </div>
             <li class="nav-item">
@@ -52,4 +53,5 @@
     <app-abmclientes *ngIf="view !== null && view == 'abmclientes'" [busquedavalue]="busquedavalue"></app-abmclientes>
     <app-localidades *ngIf="view !== null && view == 'abmlocalidades'" [busquedavalue]="busquedavalue"></app-localidades>
     <app-abmprovincias *ngIf="view !== null && view == 'abmprovincias'" [busquedavalue]="busquedavalue"></app-abmprovincias>
+    <app-abmproveedores *ngIf="view !== null && view == 'abmproveedores'" [busquedavalue]="busquedavalue"></app-abmproveedores>
     <app-page-not-found *ngIf="view !== null && view == 'pagenotfound'"></app-page-not-found>

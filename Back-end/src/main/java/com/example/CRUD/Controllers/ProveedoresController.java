@@ -1,5 +1,6 @@
 package com.example.CRUD.Controllers;
 
+import com.example.CRUD.DTOs.ProveedoresDTO;
 import com.example.CRUD.Models.Proveedores;
 import com.example.CRUD.Services.Interfaces.IProveedoresService;
 import com.sun.istack.NotNull;
@@ -21,7 +22,7 @@ public class ProveedoresController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Proveedores>> getProveedores()
+    public ResponseEntity<List<ProveedoresDTO>> getProveedores()
     {
         return new ResponseEntity<>(srv.getProveedores(), HttpStatus.OK);
     }

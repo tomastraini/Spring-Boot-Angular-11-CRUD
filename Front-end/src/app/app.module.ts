@@ -16,6 +16,8 @@ import { LocalidadesFilterPipe } from './Pipes/LocalidadesFilterPipe';
 import { AbmprovinciasComponent } from './searchbar/abmprovincias/abmprovincias.component';
 import { ProvinciasFilterPipe } from './Pipes/ProvinciasFilterPipe';
 import { LoginComponent } from './login/login.component';
+import { AbmproveedoresComponent } from './searchbar/abmproveedores/abmproveedores.component';
+import { ProveedoresFilterPipe } from './Pipes/ProveedoresFilterPipe';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { LoginComponent } from './login/login.component';
     LocalidadesFilterPipe,
     AbmprovinciasComponent,
     ProvinciasFilterPipe,
-    LoginComponent
+    LoginComponent,
+    AbmproveedoresComponent,
+    ProveedoresFilterPipe
   ],
   imports: [
     BrowserModule,
