@@ -19,6 +19,7 @@ Link to use it: https://springbootangular11crudfront.herokuapp.com/login
 - Clients CRUD
 - Locations CRUD
 - Provinces CRUD
+- Suppliers CRUD
 - Login
 
 ---
