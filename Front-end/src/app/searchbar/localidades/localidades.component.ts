@@ -31,7 +31,13 @@ export class LocalidadesComponent implements OnInit {
     }).subscribe(data => {
       this.localidades = data;
     });
-    this.http.get(this.appComponent.apiUrl + 'Provincias').subscribe(data => {
+    this.http.get(this.appComponent.apiUrl + 'Provincias',
+    {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+      })
+    })
+    .subscribe(data => {
       this.provincias = data;
     });
   }

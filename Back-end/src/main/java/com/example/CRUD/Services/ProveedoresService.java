@@ -44,7 +44,7 @@ public class ProveedoresService implements IProveedoresService {
     public Proveedores deleteProveedores(long id) {
         Proveedores prov = repo.findAll()
                 .stream().filter(x -> x.id_proveedor == id)
-                .findFirst().orElseThrow();
+                .findFirst().get();
         repo.delete(prov);
         return prov;
     }
