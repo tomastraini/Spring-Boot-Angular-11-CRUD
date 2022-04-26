@@ -1,0 +1,55 @@
+.tableMark
+{
+    max-width: 80%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    border-radius: 1%;
+}
+
+.tableTitle
+{
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+}
+
+th
+{
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+}
+
+td
+{
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+}
+
+.addButton
+{
+    margin-left: 10%;
+    margin-top: 1%;
+}
+
+.btnBorrar
+{
+    margin-right: 5%;
+    max-width: 100px;
+    max-height: 50px;
+}
+
+.btnModificar
+{
+    margin-left: 5%;
+    max-width: 100px;
+    max-height: 50px;
+}
+
+.modal-title
+{
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+}

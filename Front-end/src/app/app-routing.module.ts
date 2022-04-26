@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { AbmproveedoresComponent } from './searchbar/abmproveedores/abmproveedores.component';
 import { DetalleventasComponent } from './searchbar/detalleventas/detalleventas.component';
 import { AbmproductosComponent } from './searchbar/abmproductos/abmproductos.component';
+import { HistorialventasComponent } from './searchbar/historialventas/historialventas.component';
 
 const routes: Routes = [
   {
@@ -53,7 +54,11 @@ const routes: Routes = [
       {
         path: 'abmproductos',
         component: AbmproductosComponent
-      }
+      },
+      {
+        path: 'history',
+        component: HistorialventasComponent
+      },
     ]
   },
   {
