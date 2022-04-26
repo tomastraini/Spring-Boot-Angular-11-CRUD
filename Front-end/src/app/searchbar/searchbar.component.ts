@@ -77,6 +77,10 @@ export class SearchbarComponent implements OnInit {
     {
       this.view = 'abmproductos';
     }
+    else if (this.router.url.includes('history'))
+    {
+      this.view = 'history';
+    }
     else
     {
       this.view = 'pagenotfound';
@@ -116,6 +120,11 @@ export class SearchbarComponent implements OnInit {
   goAbmProductos(): void
   {
     window.location.href = '/abmproductos';
+  }
+
+  goHistorialVentas(): void
+  {
+    window.location.href = '/history';
   }
 
   cerrarSession(): void

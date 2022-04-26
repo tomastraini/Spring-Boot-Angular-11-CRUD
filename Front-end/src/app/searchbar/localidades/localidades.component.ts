@@ -10,6 +10,7 @@ import { AppComponent } from 'src/app/app.component';
 export class LocalidadesComponent implements OnInit {
 
   constructor(private appComponent: AppComponent, public http: HttpClient) { }
+  @Input() busquedavalue: any;
   
   cp: any;
   id_provincia: any;
@@ -19,7 +20,6 @@ export class LocalidadesComponent implements OnInit {
   provincias: any;
   
   errorTypes = 0;
-  @Input() busquedavalue: any;
 
   ngOnInit(): void
   {
