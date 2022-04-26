@@ -23,6 +23,8 @@ import { ProductosFilterPipe } from './Pipes/ProductosFilterPipe';
 import { AbmproductosComponent } from './searchbar/abmproductos/abmproductos.component';
 import { ProductosTableFilterPipe } from './Pipes/ProductosTableFilterPipe';
 import { HistorialventasComponent } from './searchbar/historialventas/historialventas.component';
+import { HistorialFilterPipe } from './Pipes/HistorialFilterPipe';
+import { detalleVentaFilterPipe } from './Pipes/detalleVentaFilterPipe';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { HistorialventasComponent } from './searchbar/historialventas/historialv
     ProductosFilterPipe,
     AbmproductosComponent,
     ProductosTableFilterPipe,
-    HistorialventasComponent
+    HistorialventasComponent,
+    HistorialFilterPipe,
+    detalleVentaFilterPipe
   ],
   imports: [
     BrowserModule,
