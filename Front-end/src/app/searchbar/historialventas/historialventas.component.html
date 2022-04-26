@@ -17,7 +17,7 @@
                 <th scope="col">Detalles</th>
             </tr>
         </thead>
-        <tbody *ngFor="let data of ventas | localidadesFilter: busquedavalue">
+        <tbody *ngFor="let data of ventas | historialFilter: busquedavalue">
             <tr>
                 <td scope="row">{{ data.id_venta }}</td>
                 <td>{{ data.cliente }}</td>
@@ -36,12 +36,15 @@
 <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content bg-dark">
-    <div class="modal-header">
+    <div class="modal-header text-white">
         <h5 class="modal-title" id="exampleModalLabel"> Detalle de venta </h5>
+        <div>
+            <label for="exampleInputPassword1" class="form-label">Buscar</label>
+            <input  type="text" class="form-control searcher" [(ngModel)]="searcher" (ngModelChange)="filterTable()" id="exampleInputPassword1">
+        </div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
-
         <table class="table">
             <thead>
                 <tr>
@@ -52,9 +55,9 @@
                     <th scope="col">Total</th>
                 </tr>
             </thead>
-            <tbody *ngFor="let data of detalleventasfiltered">
+            <tbody *ngFor="let data of detalleventasfiltered | detalleVentaFilterPipe: searcher">
                 <tr>
-                    <td scope="row">{{ data.id_venta }}</td>
+                    <td scope="row">{{ data.id_detalle_venta }}</td>
                     <td>{{ data.producto }}</td>
                     <td>{{ data.importe }}</td>
                     <td>{{ data.cantidad }}</td>

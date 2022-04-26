@@ -18,6 +18,7 @@ export class HistorialventasComponent implements OnInit {
   detalleventasfiltered: any[] = [];
   total: number = 0;
 
+  searcher: string = "";
 
   ngOnInit(): void
   {
@@ -46,6 +47,14 @@ export class HistorialventasComponent implements OnInit {
   openModal(id_venta: any): void
   {
     this.detalleventasfiltered = this.detalleventas.filter(x => x.id_venta === id_venta);
+    
   }
 
+  filterTable(): void
+  {
+    this.detalleventasfiltered.filter(val =>
+        val.producto.indexOf(this.searcher) !== -1 ||
+        val.producto.toLowerCase().indexOf(this.searcher.toLowerCase()) !== -1
+      )
+  }
 }
