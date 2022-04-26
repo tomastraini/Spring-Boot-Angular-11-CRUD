@@ -22,8 +22,12 @@
                   <li><a class="dropdown-item" (click)="goAbmLocalidades()"> ABM Localidades </a></li>
                   <li><a class="dropdown-item" (click)="goAbmProvincias()"> ABM Provincias </a></li>
                   <li><a class="dropdown-item" (click)="goAbmProveedores()"> ABM Proveedores </a></li>
+                  <li><a class="dropdown-item" (click)="goAbmProductos()"> ABM Productos </a></li>
                 </ul>
               </div>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" data-bs-toggle="modal" data-bs-target="#detalleVentasModel">Cargar venta</a>
+            </li>
             <li class="nav-item">
             <a class="nav-link" (click)="goAbout()">Sobre nosotros</a>
             </li>
@@ -54,4 +58,48 @@
     <app-localidades *ngIf="view !== null && view == 'abmlocalidades'" [busquedavalue]="busquedavalue"></app-localidades>
     <app-abmprovincias *ngIf="view !== null && view == 'abmprovincias'" [busquedavalue]="busquedavalue"></app-abmprovincias>
     <app-abmproveedores *ngIf="view !== null && view == 'abmproveedores'" [busquedavalue]="busquedavalue"></app-abmproveedores>
+    <app-abmproductos *ngIf="view !== null && view == 'abmproductos'" [busquedavalue]="busquedavalue"></app-abmproductos>
+    <app-detalleventas *ngIf="view !== null && view == 'vender'" [busquedavalue]="busquedavalue"> </app-detalleventas>
     <app-page-not-found *ngIf="view !== null && view == 'pagenotfound'"></app-page-not-found>
+
+
+  
+  <div class="modal fade" id="detalleVentasModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="exampleModalLabel"> Cargar venta </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <form (ngSubmit)="insertVenta()">
+        <div class="modal-body text-white">
+            
+            <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Nombre del cliente</label>
+                        <select class="form-select mb-3" [(ngModel)]="id_cliente" name="id_cliente">
+                            <option *ngFor="let cli of clientes" value="{{ cli.id_cliente }}">
+                                {{ cli.razon_social }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label"> Forma de pago </label>
+                        <select class="form-select mb-3" [(ngModel)]="id_forma_pago" name="id_forma_pago">
+                            <option *ngFor="let formas of FormasPago" value="{{ formas.id_forma_pago }}">
+                                {{ formas.forma_pago }}
+                            </option>
+                        </select>
+                    </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Empezar venta</button>
+        </div>
+
+        </form>
+    </div>
+    </div>
+  </div>

@@ -9,6 +9,8 @@ import { AboutComponent } from './searchbar/about/about.component';
 import { AbmprovinciasComponent } from './searchbar/abmprovincias/abmprovincias.component';
 import { LoginComponent } from './login/login.component';
 import { AbmproveedoresComponent } from './searchbar/abmproveedores/abmproveedores.component';
+import { DetalleventasComponent } from './searchbar/detalleventas/detalleventas.component';
+import { AbmproductosComponent } from './searchbar/abmproductos/abmproductos.component';
 
 const routes: Routes = [
   {
@@ -43,6 +45,14 @@ const routes: Routes = [
       {
         path: 'abmproveedores',
         component: AbmproveedoresComponent
+      },
+      {
+        path: 'vender',
+        component: DetalleventasComponent
+      },
+      {
+        path: 'abmproductos',
+        component: AbmproductosComponent
       }
     ]
   },
