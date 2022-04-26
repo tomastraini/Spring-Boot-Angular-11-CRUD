@@ -10,6 +10,7 @@ export class AppComponent implements OnInit{
   apiUrl = 'https://springbootangular11crud.herokuapp.com/api/';
   title = 'front-end';
 
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
   }
 }

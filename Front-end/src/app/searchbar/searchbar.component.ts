@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppComponent } from '../app.component';
 
 @Component({
@@ -13,6 +13,13 @@ export class SearchbarComponent implements OnInit {
   view: any;
   id: any;
 
+  clientes: any;
+  id_cliente: any;
+  FormasPago: any;
+  id_forma_pago: any;
+  usuario : any;
+  id_usuario: any;
+
   constructor(public route: ActivatedRoute, public router: Router, private http: HttpClient, private appComponent: AppComponent) { }
 
 
@@ -22,6 +29,18 @@ export class SearchbarComponent implements OnInit {
     {
         window.location.href = '/login';
     }
+    let headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+    });
+    
+    this.http.get(this.appComponent.apiUrl + 'Clientes', { headers: headers }).subscribe(data => {
+      this.clientes = data;
+      this.http.get(this.appComponent.apiUrl + 'FormasPago', { headers: headers }).subscribe(data => {
+        this.FormasPago = data;
+      });
+    });
+
+
     if (this.router.url === '/')
     {
       this.view = '';
@@ -49,6 +68,14 @@ export class SearchbarComponent implements OnInit {
     else if (this.router.url.includes('abmproveedores'))
     {
       this.view = 'abmproveedores';
+    }
+    else if (this.router.url.includes('vender'))
+    {
+      this.view = 'vender';
+    }
+    else if (this.router.url.includes('abmproductos'))
+    {
+      this.view = 'abmproductos';
     }
     else
     {
@@ -81,10 +108,27 @@ export class SearchbarComponent implements OnInit {
     window.location.href = '/abmproveedores';
   }
 
+  goVender(): void
+  {
+    window.location.href = '/vender';
+  }
+
+  goAbmProductos(): void
+  {
+    window.location.href = '/abmproductos';
+  }
+
   cerrarSession(): void
   {
     sessionStorage.clear();
     window.location.href = '/login';
+  }
+
+  insertVenta(): void
+  {
+    sessionStorage.setItem('id_cliente', this.id_cliente);
+    sessionStorage.setItem('id_forma_pago', this.id_forma_pago);
+    window.location.href = '/vender';
   }
 
 }

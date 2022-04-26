@@ -1,0 +1,105 @@
+<div class="separator"> Cabecera </div>
+
+<div class="cabecera text-white">
+    <div class="mb-3">
+        <label class="form-label ">Nombre del cliente</label>
+        <select class="form-select mb-3" [(ngModel)]="id_cliente" name="id_cliente">
+            <option *ngFor="let cli of clientes" value="{{ cli.id_cliente }}">
+                {{ cli.razon_social }}
+            </option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label"> Forma de pago </label>
+        <select class="form-select mb-3" [(ngModel)]="id_forma_pago" name="id_forma_pago">
+            <option *ngFor="let formas of FormasPago" value="{{ formas.id_forma_pago }}">
+                {{ formas.forma_pago }}
+            </option>
+        </select>
+    </div>
+</div>
+
+<div class="separator"> 
+    Venta de productos
+</div>
+
+<div class="sellingInLine">
+    <button class="btn btn-primary addButton" (click)="insertToList()">
+        <i class="fa fa-plus"></i>
+        <span> Agregar al carrito </span>
+    </button>
+    <div class="mb-3 selectOptionsdiv">
+        <label class="form-label text-white"> Producto </label>
+        <select class="form-select mb-3 selectOptions" [(ngModel)]="id_producto" name="id_producto" 
+        (change)="selectProduct(id_producto)">
+            <option *ngFor="let producto of productos" value="{{ producto.id_producto }}">
+                {{ producto.descripcion }}
+            </option>
+        </select>
+    </div>
+
+    <div class="mb-3 PrecioDiv">
+        <label class="form-label text-white"> Precio </label>
+         <input type="text" class="form-control" disabled="true" [(ngModel)]="importe">
+    </div>
+
+    <div class="mb-3 cantidadDiv">
+        <label class="form-label text-white"> Cantidad </label>
+         <input type="number" class="form-control" [(ngModel)]="cantidad" (ngModelChange)="updatePrices()">
+    </div>
+
+    <div class="mb-3 cantidadDiv">
+        <label class="form-label text-white"> Total </label>
+         <input type="text" class="form-control" disabled="true" [(ngModel)]="importe_r">
+    </div>
+</div>
+
+
+<div class="shadow tableMark border border-light">
+    <h1 class="tableTitle text-decoration-underline">
+        Lista de productos
+    </h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"> # </th>
+                <th scope="col"> Producto </th>
+                <th scope="col"> Importe </th>
+                <th scope="col"> Cantidad </th>
+                <th scope="col"> Importe total </th>
+                <th scope="col"> Borrar </th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let data of productosAVender | productosFilter: busquedavalue">
+            <tr>
+                <td scope="row">{{ data.id_producto }}</td>
+                <td>{{ data.producto }}</td>
+                <td>{{ data.importe }}</td>
+                <td>{{ data.cantidad }}</td>
+                <td>{{ data.importe_r }}</td>
+                <td>
+                    <button class="btn btn-danger btnBorrar" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                    (click)="deleteFromList(data.id_producto)">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td class="ml-1">
+            {{ importe_total }}
+        </td>
+    </table>
+
+</div>
+<button class="btn btn-success insertButton" (click)="uploadDatabase()" *ngIf="showLoader">
+    <i class="fa fa-check-circle"></i>
+    <span> Confirmar venta </span>
+</button>

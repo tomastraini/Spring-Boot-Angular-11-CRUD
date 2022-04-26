@@ -18,6 +18,10 @@ import { ProvinciasFilterPipe } from './Pipes/ProvinciasFilterPipe';
 import { LoginComponent } from './login/login.component';
 import { AbmproveedoresComponent } from './searchbar/abmproveedores/abmproveedores.component';
 import { ProveedoresFilterPipe } from './Pipes/ProveedoresFilterPipe';
+import { DetalleventasComponent } from './searchbar/detalleventas/detalleventas.component';
+import { ProductosFilterPipe } from './Pipes/ProductosFilterPipe';
+import { AbmproductosComponent } from './searchbar/abmproductos/abmproductos.component';
+import { ProductosTableFilterPipe } from './Pipes/ProductosTableFilterPipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,11 @@ import { ProveedoresFilterPipe } from './Pipes/ProveedoresFilterPipe';
     ProvinciasFilterPipe,
     LoginComponent,
     AbmproveedoresComponent,
-    ProveedoresFilterPipe
+    ProveedoresFilterPipe,
+    DetalleventasComponent,
+    ProductosFilterPipe,
+    AbmproductosComponent,
+    ProductosTableFilterPipe
   ],
   imports: [
     BrowserModule,
