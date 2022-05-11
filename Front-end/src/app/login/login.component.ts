@@ -14,11 +14,14 @@ export class LoginComponent implements OnInit {
   user: any;
   password: any;
   errorTypes = 0;
+  loading = false;
+
   ngOnInit(): void
   {
   }
   login(event: any): void
   {
+    this.loading = true;
     this.http.post(this.appComponent.apiUrl + 'authenticate',
     {
       username: this.user,
@@ -57,22 +60,26 @@ export class LoginComponent implements OnInit {
               else
               {
                 this.errorTypes = 1;
+                this.loading = false;
               }
             },
             err =>
             {
               this.errorTypes = 1;
+              this.loading = false;
             }
           );
         }
         else
         {
           this.errorTypes = 1;
+          this.loading = false;
         }
       },
       err =>
       {
         this.errorTypes = 1;
+        this.loading = false;
         console.log(err);
       }
     );

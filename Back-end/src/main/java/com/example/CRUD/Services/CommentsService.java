@@ -28,6 +28,7 @@ public class CommentsService implements ICommentsService {
     public Comments insertComment(Comments comments) {
         if(comments == null) { return null; }
         Calendar cal = Calendar.getInstance();
+        comments.id_comment = 0;
         comments.uploaddate = cal.getTime();
         repo.save(comments);
         return comments;

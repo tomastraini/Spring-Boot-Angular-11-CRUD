@@ -12,14 +12,25 @@ public class Comments {
     public int id_comment;
     public String comment;
     public Date uploaddate;
+    public String ip;
 
-    public Comments() {
+    public Comments()
+    {
     }
 
-    public Comments(int id_comment, String comment, Date uploaddate) {
+    public Comments(int id_comment, String comment, String ip, Date uploaddate) {
         this.id_comment = id_comment;
         this.comment = comment;
+        this.ip = ip;
         this.uploaddate = uploaddate;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
     public int getId_comment() {
