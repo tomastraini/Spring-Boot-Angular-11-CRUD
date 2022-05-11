@@ -1,5 +1,8 @@
 # SpringBootProject
-Project made with Spring Boot, Hibernate and SQL Server as database manager.
+Project made with:
+- Spring Boot (Java) and Hibernate as ORM
+- Angular 11 as Front-end
+- SQL Server as main DB manager and MongoDB microservices
 
 <br>
 
@@ -20,6 +23,9 @@ Link to use it: https://springbootangular11crudfront.herokuapp.com/login
 - Locations CRUD
 - Provinces CRUD
 - Suppliers CRUD
+- Sales generator
+- Sales history
+- Deliveries CRUD
 - Login
 
 ---
