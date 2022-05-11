@@ -48,7 +48,7 @@ import { detalleVentaFilterPipe } from './Pipes/detalleVentaFilterPipe';
     ProductosTableFilterPipe,
     HistorialventasComponent,
     HistorialFilterPipe,
-    detalleVentaFilterPipe
+    detalleVentaFilterPipe,
   ],
   imports: [
     BrowserModule,

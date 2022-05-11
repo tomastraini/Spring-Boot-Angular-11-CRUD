@@ -1,6 +1,6 @@
 <div class="separator"></div>
 
-<h1 class="titleMenu">Bienvenido al sistema de ABM hecho con Spring boot y Angular!</h1>
+<h1 class="titleMenu">Bienvenido al sistema de ABM hecho con Spring boot y Angular</h1>
 
 <div class="separator"></div>
 
@@ -10,9 +10,21 @@
     <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
         <a *ngIf="errorTypes === 1">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            Ha ocurrido algún error!!
+            No completaste el campo!!
+        </a>
+        <a *ngIf="errorTypes === 2">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            Ha habido un error al cargar el comentario!!
         </a>
     </div>
+
+    <div class="alert alert-success successLabel" role="alert" *ngIf="showSuccess !== 0">
+        <a *ngIf="showSuccess === 1">
+            <i class="fa fa-check" aria-hidden="true"></i>
+            Comentario cargado correctamente!!
+        </a>
+    </div>
+
     <div class="form-group text-white">
         <label for="exampleFormControlTextarea1">Escribe tu comentario</label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"[(ngModel)]="textArea" name="textArea"></textarea>
@@ -31,11 +43,11 @@
        <div class ="username">{{ comment.usern }}</div>
        <div class ="user-comment">
          <h6>{{ comment.comment }}</h6>
+         <h6>IP: {{ comment.ip }}</h6>
          <div style ="clear:both;"></div>
          <span>{{ comment.fecha_diff }}</span>
        </div>
     </div>
- 
 </div>
 
 <div class="farBottom">

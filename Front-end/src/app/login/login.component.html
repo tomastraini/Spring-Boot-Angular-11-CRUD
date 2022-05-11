@@ -7,8 +7,14 @@
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
             Ususario o contraseña incorrectos!
         </a>
-    </div>
-      
+      </div>
+      <div class="alert alert-danger loadingLabel" role="alert" *ngIf="loading">
+        <span class="loadingSign">Cargando...</span>
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
       <form (ngSubmit)="login($event.target)">
         <h6 name = "indicatorl" id="indicatorl" style="color:red;"> </h6>
         <input type="text" class="fadeIn second" placeholder="Usuario" name="user" [(ngModel)]="user">
@@ -20,4 +26,4 @@
         <button type="button" class="btn btn-danger"  onclick="history.back()" style="position: absolute; top:10; left:10;">Volver</button>
       </form>
     </div>
-</div>  
+</div>
