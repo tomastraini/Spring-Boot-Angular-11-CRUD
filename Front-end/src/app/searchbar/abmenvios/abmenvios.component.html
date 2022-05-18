@@ -1,0 +1,292 @@
+
+
+<div *ngIf="envios === undefined" class="loadingScreen fadeInNav">
+    <div class="spinner-border text-primary" role="status">
+    </div>
+    <h3 class="text-white"[class.cargandoText]="lang == 'es'"
+    [class.cargandoTextEng]="lang != 'es'">
+        {{'DISPATCHESCRUD.LOADING' | translate}}
+    </h3>
+</div>
+
+
+<div *ngIf="((envios !== undefined) && envios.length > 0) || ((envios !== undefined) && envios.length == 0)">
+    <div class="separator">
+        {{'DISPATCHESCRUD.TITLE' | translate}}
+    </div>
+    <button class="btn btn-primary addButton" data-bs-toggle="modal" data-bs-target="#insertModal" (click)="openinsertEnvio()">
+        <i class="fa fa-plus"></i>
+        <span>
+            {{'DISPATCHESCRUD.ADDDISPATCH' | translate}}
+        </span>
+    </button>
+    
+    <div class="shadow tableMark border border-light">
+        <h1 class="tableTitle text-decoration-underline">
+            {{'DISPATCHESCRUD.TABLETITLE' | translate}}
+        </h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">
+                        {{'DISPATCHESCRUD.DISPATCHESNAME' | translate}}
+                    </th>
+                    <th scope="col">
+                        {{'DISPATCHESCRUD.DISPATCHESPHONE' | translate}}
+                    </th>
+                    <th scope="col">
+                        {{'DISPATCHESCRUD.DISPATCHESLOCATION' | translate}}
+                    </th>
+                    <th scope="col">
+                        {{'DISPATCHESCRUD.DISPATCHESDATE' | translate}}
+                    </th>
+                    <th scope="col">
+                        {{'DISPATCHESCRUD.DISPATCHESDAYSTODELIVER' | translate}}
+                    </th>
+                    <th scope="col">
+                        {{'DISPATCHESCRUD.DISPATCHESADDRESS' | translate}}
+                    </th>
+                    <th scope="col">
+                        {{'DISPATCHESCRUD.DISPATCHESCOST' | translate}}
+                    </th>
+                    <th scope="col">
+                        {{'DISPATCHESCRUD.DISPATCHESACTIONS' | translate}}
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let data of envios | enviosFilter: busquedavalue">
+                <tr>
+                    <td scope="row">{{ data.id_envio }}</td>
+                    <td>{{ data.cliente }}</td>
+                    <td>{{ data.telefono }}</td>
+                    <td>{{ data.localidad }}</td>
+                    <td>{{ data.fechaFormatted }}</td>
+                    <td>{{ data.timeDiff }}</td>
+                    <td>{{ data.direccion }}</td>
+                    <td>${{ data.costo }}</td>
+                    <td>
+                        <button class="btn btn-danger btnBorrar" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                        (click)="deleteOpen(data.id_envio)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                        <button class="btn btn-warning btnModificar" data-bs-toggle="modal" data-bs-target="#editModal"
+                        (click)="modifyOpen(data.id_envio, data.telefono, data.fecha, data.direccion, data.costo, data.id_cliente,
+                        data.cliente, data.localidad)">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="separator"></div>
+    
+    
+    
+      
+    <!-- Modal de carga de Envíos -->
+    <div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content bg-dark">
+        <div class="modal-header">
+            <h5 class="modal-title text-white" id="exampleModalLabel">
+                {{'DISPATCHESCRUD.ADDDISPATCH' | translate}}
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
+            <a *ngIf="errorTypes === 1">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                {{'DISPATCHESCRUD.LACKNAME' | translate}}
+            </a>
+            <a *ngIf="errorTypes === 2">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                {{'DISPATCHESCRUD.LACKPHONE' | translate}}
+            </a>
+        </div>
+    
+        <form (ngSubmit)="insertEnvio()">
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label text-white">
+                        {{'DISPATCHESCRUD.DISPATCHESADDRESS' | translate}}
+                    </label>
+                    <input type="text" class="form-control" placeholder="{{'DISPATCHESCRUD.DISPATCHESADDRESS' | translate}}" name="direccion" [(ngModel)]="direccion">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-white">
+                        {{'DISPATCHESCRUD.DISPATCHESPHONE' | translate}}
+                    </label>
+                    <input type="text" class="form-control" placeholder="{{'DISPATCHESCRUD.DISPATCHESPHONE' | translate}}" name="telefono" [(ngModel)]="telefono">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label text-white">
+                        {{'DISPATCHESCRUD.DISPATCHESCOST' | translate}} 
+                        <i class="fa fa-money" aria-hidden="true"></i>
+                    </label>
+                    <input type="number" class="form-control" placeholder="{{'DISPATCHESCRUD.DISPATCHESCOST' | translate}}" name="costo" [(ngModel)]="costo">
+                </div>
+    
+                <div class="mb-3">
+                    <label class="form-label text-white">
+                        {{'DISPATCHESCRUD.DISPATCHESDATE' | translate}}
+                    </label>
+                    <input type="datetime-local" class="form-control" placeholder="{{'DISPATCHESCRUD.DISPATCHESDATE' | translate}}" name="fecha" [(ngModel)]="fecha">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label text-white">
+                        {{'DISPATCHESCRUD.DISPATCHESNAME' | translate}}
+                    </label>
+                    <select class="form-select mb-3" [(ngModel)]="id_cliente" name="id_cliente"
+                    (selectstart)="true">
+                        <option [selected]="true" disabled value="0">
+                            {{'DISPATCHESCRUD.DISPATCHESSELECTNAME' | translate}}
+                        </option>
+                        <option *ngFor="let cli of clientes" value="{{ cli.id_cliente }}">
+                            {{ cli.razon_social }}
+                        </option>
+                    </select>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary cerrarModalBTN" data-bs-dismiss="modal" id="cerrarModalBTN" #cerrarModalBTN
+                name="cerrarModalBTN"> 
+                    {{'DISPATCHESCRUD.CANCEL' | translate}}
+                </button>
+                <button type="button" class="btn btn-primary" type="submit">
+                    {{'DISPATCHESCRUD.ADD' | translate}}
+                    <i class="fa fa-plus"></i>
+                </button>
+            </div>
+        </form>
+        </div>
+        
+    </div>
+    </div>
+    
+    <!-- Modal de modificar de Envíos -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark">
+            <div class="modal-header">
+                <h5 class="modal-title text-white" id="exampleModalLabel">
+                    {{'DISPATCHESCRUD.MODIFYDISPATCH' | translate}}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
+                <a *ngIf="errorTypes === 1">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    {{'DISPATCHESCRUD.LACKNAME' | translate}}
+                </a>
+                <a *ngIf="errorTypes === 2">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    {{'DISPATCHESCRUD.LACKPHONE' | translate}}
+                </a>
+            </div>
+        
+            <form (ngSubmit)="modifyEnvio()">
+                <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label text-white">
+                                {{'DISPATCHESCRUD.DISPATCHESADDRESS' | translate}}
+                            </label>
+                            <input type="text" class="form-control" placeholder="{{'DISPATCHESCRUD.DISPATCHESADDRESS' | translate}}" 
+                            name="direccion" [(ngModel)]="direccion">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-white">
+                                {{'DISPATCHESCRUD.DISPATCHESPHONE' | translate}}
+                            </label>
+                            <input type="text" class="form-control" placeholder="{{'DISPATCHESCRUD.DISPATCHESPHONE' | translate}}" name="telefono" [(ngModel)]="telefono">
+                        </div>
+    
+                        <div class="mb-3">
+                            <label class="form-label text-white">
+                                {{'DISPATCHESCRUD.DISPATCHESCOST' | translate}}
+                                <i class="fa fa-money" aria-hidden="true"></i>
+                            </label>
+                            <input type="number" class="form-control" placeholder="{{'DISPATCHESCRUD.DISPATCHESCOST' | translate}}" name="costo" [(ngModel)]="costo">
+                        </div>
+        
+                        <div class="mb-3">
+                            <label class="form-label text-white">
+                                {{'DISPATCHESCRUD.DISPATCHESDATE' | translate}}
+                            </label>
+                            <input type="datetime-local" class="form-control" placeholder="{{'DISPATCHESCRUD.DISPATCHESDATE' | translate}}" name="fecha" [(ngModel)]="fecha">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-white">
+                                {{'DISPATCHESCRUD.DISPATCHESNAME' | translate}}
+                            </label>
+                            <select class="form-select mb-3" [(ngModel)]="id_cliente" name="id_cliente">
+                                <option *ngFor="let cli of clientes" value="{{ cli.id_cliente }}">
+                                    {{ cli.razon_social }}
+                                </option>
+                            </select>
+                        </div>
+        
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" #cerrarModalBTN id="cerrarModalBTN">
+                        {{'DISPATCHESCRUD.CANCEL' | translate}} 
+                    </button>
+                    <button type="button" class="btn btn-warning" type="submit"> 
+                        {{'DISPATCHESCRUD.MODIFY' | translate}}
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                </div>
+            </form>
+            </div>
+            
+        </div>
+        </div>
+    
+        <!-- Modal de borrar de Envíos -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark">
+            <div class="modal-header">
+                <h5 class="modal-title text-white" id="exampleModalLabel">
+                    {{'DISPATCHESCRUD.SURE' | translate}}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
+                <a *ngIf="errorTypes === 1">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    {{'DISPATCHESCRUD.LACKNAME' | translate}}
+                </a>
+                <a *ngIf="errorTypes === 2">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    {{'DISPATCHESCRUD.LACKPHONE' | translate}}
+                </a>
+            </div>
+        
+            <form (ngSubmit)="deleteEnvio()">
+                <div class="modal-body">
+                        <h3 class="text-white">
+                            {{'DISPATCHESCRUD.SUREDELETE' | translate}}
+                        </h3>
+        
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        {{'DISPATCHESCRUD.CANCEL' | translate}}
+                    </button>
+                    <button type="button" class="btn btn-danger" type="submit">
+                        {{'DISPATCHESCRUD.DELETE' | translate}}
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+            </form>
+            </div>
+            
+        </div>
+        </div>
+</div>

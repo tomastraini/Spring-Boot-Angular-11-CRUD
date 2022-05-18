@@ -11,6 +11,7 @@ export class HistorialventasComponent implements OnInit {
 
   constructor(private appComponent: AppComponent, public http: HttpClient) { }
   @Input() busquedavalue: any;
+  lang = this.appComponent.actualLang();
 
   ventas: any[] = [];
   detalleventas: any[] = [];

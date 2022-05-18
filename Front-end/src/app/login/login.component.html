@@ -1,6 +1,7 @@
 <div class="wrapper fadeInDown">
     <div id="formContent">
-      <h2 class="active">  Iniciar sesión  </h2>
+      <h2 class="active">  {{ 'LOGINTAB.LOGIN' | translate }} </h2>
+      <button class="btn btn-danger" (click)="changeLang()"> <i class="fa fa-language" aria-hidden="true"></i> </button>
   
       <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
         <a *ngIf="errorTypes === 1">
@@ -9,21 +10,23 @@
         </a>
       </div>
       <div class="alert alert-danger loadingLabel" role="alert" *ngIf="loading">
-        <span class="loadingSign">Cargando...</span>
+        <span class="loadingSign">{{ loadingMessage }}</span>
         <div class="spinner-border" role="status">
-          <span class="visually-hidden">Loading...</span>
         </div>
       </div>
 
-      <form (ngSubmit)="login($event.target)">
+      <form (ngSubmit)="login()" class="mainForm">
         <h6 name = "indicatorl" id="indicatorl" style="color:red;"> </h6>
-        <input type="text" class="fadeIn second" placeholder="Usuario" name="user" [(ngModel)]="user">
+        <input type="text" class="fadeIn second" placeholder="{{ 'LOGINTAB.USERNAME' | translate }}" name="user" [(ngModel)]="user">
 
-        <input type="password" class="fadeIn third" name="password" placeholder="Contraseña" [(ngModel)]="password">
+        <input type="password" class="fadeIn third" name="password" placeholder="{{ 'LOGINTAB.PASSWORD' | translate }}" [(ngModel)]="password">
 
-        <input type="submit" style="cursor: pointer;" class="fadeIn fourth" value="Iniciar sesión">
+        <input type="submit" style="cursor: pointer;" class="fadeIn fourth sessionStart" value="{{ 'LOGINTAB.LOGIN' | translate }}">
 
-        <button type="button" class="btn btn-danger"  onclick="history.back()" style="position: absolute; top:10; left:10;">Volver</button>
+        <button type="button" class="btn btn-danger backbtn fadeIn fourth"  onclick="history.back()" 
+        style="position: absolute; top:10; left:10;">
+          {{ 'LOGINTAB.GOBACK' | translate }}
+       </button>
       </form>
     </div>
 </div>

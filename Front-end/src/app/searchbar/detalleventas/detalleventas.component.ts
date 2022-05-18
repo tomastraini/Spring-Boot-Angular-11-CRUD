@@ -106,7 +106,6 @@ export class DetalleventasComponent implements OnInit, OnDestroy {
     this.importe = null;
     this.importe_r = null;
     this.importe_total = this.productosAVender.reduce((a, b) => a + b.importe_r, 0);
-    console.log(this.productosAVender);    
   }
 
   deleteFromList(id: any): void

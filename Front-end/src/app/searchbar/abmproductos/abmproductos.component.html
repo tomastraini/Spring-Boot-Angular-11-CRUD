@@ -1,25 +1,50 @@
+
+<div *ngIf="productos === undefined" class="loadingScreen fadeInNav">
+    <div class="spinner-border text-primary" role="status">
+    </div>
+    <h3 class="text-white" [class.cargandoText]="lang == 'es'"
+    [class.cargandoTextEng]="lang != 'es'">
+        {{'ABMPRODUCTOS.LOADING' | translate}}
+    </h3>
+</div>
+
+
+<div  *ngIf="productos !== undefined">
+    
 <div class="separator"> 
-    CRUD de productos
+    {{'ABMPRODUCTOS.TITLE' | translate}}
 </div>
 
 <button class="btn btn-primary addButton" data-bs-toggle="modal" data-bs-target="#insertModal" (click)="openInsertModal()">
     <i class="fa fa-plus"></i>
-    <span> Agregar producto </span>
+    <span>
+        {{'ABMPRODUCTOS.ADDPRODUCTO' | translate}}
+    </span>
 </button>
 
 <div class="shadow tableMark border border-light">
     <h1 class="tableTitle text-decoration-underline">
-        Tabla de productos
+        {{'ABMPRODUCTOS.TABLETITLE' | translate}}
     </h1>
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Descripcion</th>
-                <th scope="col">Proveedor</th>
-                <th scope="col">Stock</th>
-                <th scope="col">Importe</th>
-                <th scope="col">Acciones</th>
+                <th scope="col">
+                    {{'ABMPRODUCTOS.PRODUCTOSDESCRIPCION' | translate}}
+                </th>
+                <th scope="col">
+                    {{'ABMPRODUCTOS.PRODUCTOSSUPPLIER' | translate}}
+                </th>
+                <th scope="col">
+                    {{'ABMPRODUCTOS.PRODUCTOSSTOCK' | translate}}
+                </th>
+                <th scope="col">
+                    {{'ABMPRODUCTOS.PRODUCTOSPRICE' | translate}}
+                </th>
+                <th scope="col">
+                    {{'ABMPRODUCTOS.ACTIONS' | translate}}
+                </th>
             </tr>
         </thead>
         <tbody *ngFor="let data of productos | productosTableFilter: busquedavalue">
@@ -53,48 +78,80 @@
 <!-- Modal de carga de productos -->
 <div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+    <div class="modal-content bg-dark">
     <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"> Cargar proveedor</h5>
+        <h5 class="modal-title text-white" id="exampleModalLabel">
+            {{'ABMPRODUCTOS.ADDPRODUCTO' | translate}}
+        </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
         <a *ngIf="errorTypes === 1">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            Falta completar el campo de nombre!
+            {{'ABMPRODUCTOS.LACKDESCRIPCION' | translate}}
         </a>
         <a *ngIf="errorTypes === 2">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            Falta completar el campo de teléfono!
+            {{'ABMPRODUCTOS.LACKSUPPLIER' | translate}}
+        </a>
+        <a *ngIf="errorTypes === 3">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            {{'ABMPRODUCTOS.LACKSTOCK' | translate}}
+        </a>
+        <a *ngIf="errorTypes === 4">
+            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            {{'ABMPRODUCTOS.LACKPRICE' | translate}}
         </a>
     </div>
 
     <form (ngSubmit)="insertProducto()">
         <div class="modal-body">
                 <div class="mb-3">
-                    <label class="form-label">Descripcion del producto</label>
-                    <input type="text" class="form-control" placeholder="Descripcion" name="descripcion" [(ngModel)]="descripcion">
+                    <label class="form-label text-white">
+                        {{'ABMPRODUCTOS.PRODUCTOSDESCRIPCION' | translate}}
+                    </label>
+                    <input type="text" class="form-control" placeholder="{{'ABMPRODUCTOS.PRODUCTOSDESCRIPCION' | translate}}" 
+                    name="descripcion"
+                    [(ngModel)]="descripcion">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-white">
+                        {{'ABMPRODUCTOS.PRODUCTOSSUPPLIER' | translate}}
+                    </label>
+                    <select class="form-select mb-3" [(ngModel)]="id_proveedor" name="id_proveedor">
+                        <option value="0">
+                            {{'ABMPRODUCTOS.PRODUCTOSSELECTSUPPLIER' | translate}}
+                        </option>
+
+                        <option *ngFor="let prov of proveedores" value="{{ prov.id_proveedor }}">
+                            {{ prov.razon_social_proveedor }}
+                        </option>
+                    </select>
                 </div>
 
-                <select class="form-select mb-3" [(ngModel)]="id_proveedor" name="id_proveedor">
-                    <option *ngFor="let prov of proveedores" value="{{ prov.id_proveedor }}">
-                        {{ prov.razon_social_proveedor }}
-                    </option>
-                </select>
-
                 <div class="mb-3">
-                    <label class="form-label">Stock</label>
-                    <input type="text" class="form-control" placeholder="Stock" name="stock" [(ngModel)]="stock">
+                    <label class="form-label text-white">
+                        {{'ABMPRODUCTOS.PRODUCTOSSTOCK' | translate}}
+                    </label>
+                    <input type="text" class="form-control" placeholder="{{'ABMPRODUCTOS.PRODUCTOSSTOCK' | translate}}"
+                    name="stock" [(ngModel)]="stock">
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Importe</label>
-                    <input type="text" class="form-control" placeholder="Importe" name="importe" [(ngModel)]="importe">
+                    <label class="form-label text-white">
+                        {{'ABMPRODUCTOS.PRODUCTOSPRICE' | translate}}
+                    </label>
+                    <input type="text" class="form-control" placeholder="{{'ABMPRODUCTOS.PRODUCTOSPRICE' | translate}}"
+                    name="importe"
+                    [(ngModel)]="importe">
                 </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar </button>
-            <button type="button" class="btn btn-primary" type="submit"> Cargar
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                {{'ABMPRODUCTOS.CANCEL' | translate}}
+            </button>
+            <button type="button" class="btn btn-primary" type="submit">
+                {{'ABMPRODUCTOS.ADD' | translate}}
                 <i class="fa fa-plus"></i>
             </button>
         </div>
@@ -107,50 +164,81 @@
 <!-- Modal de modificar de productos -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content bg-dark">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"> Modificar productos</h5>
+            <h5 class="modal-title text-white" id="exampleModalLabel">
+                {{'ABMPRODUCTOS.MODIFYPRODUCTO' | translate}}
+            </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
             <a *ngIf="errorTypes === 1">
                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                Falta completar el campo de nombre!
+                {{'ABMPRODUCTOS.LACKDESCRIPCION' | translate}}
             </a>
             <a *ngIf="errorTypes === 2">
                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                Falta completar el campo de teléfono!
+                {{'ABMPRODUCTOS.LACKSUPPLIER' | translate}}
+            </a>
+            <a *ngIf="errorTypes === 3">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                {{'ABMPRODUCTOS.LACKSTOCK' | translate}}
+            </a>
+            <a *ngIf="errorTypes === 4">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                {{'ABMPRODUCTOS.LACKPRICE' | translate}}
             </a>
         </div>
     
         <form (ngSubmit)="modifyProveedor()">
             <div class="modal-body">
                     <div class="mb-3">
-                        <label class="form-label">Descripcion del producto</label>
-                        <input type="text" class="form-control" placeholder="Descripcion" name="descripcion" [(ngModel)]="descripcion">
-                    </div>
-
-                    <select class="form-select mb-3" [(ngModel)]="id_proveedor" name="id_proveedor">
-                        <option *ngFor="let prov of proveedores" value="{{ prov.id_proveedor }}">
-                            {{ prov.razon_social_proveedor }}
-                        </option>
-                    </select>
-
-                    <div class="mb-3">
-                        <label class="form-label">Stock</label>
-                        <input type="text" class="form-control" placeholder="Teléfono" name="stock" [(ngModel)]="stock">
+                        <label class="form-label text-white">
+                            {{'ABMPRODUCTOS.PRODUCTOSDESCRIPCION' | translate}}
+                        </label>
+                        <input type="text" class="form-control" placeholder="{{'ABMPRODUCTOS.PRODUCTOSDESCRIPCION' | translate}}"
+                        name="descripcion" [(ngModel)]="descripcion">
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Importe</label>
-                        <input type="text" class="form-control" placeholder="Teléfono" name="importe" [(ngModel)]="importe">
+                        <label class="form-label text-white">
+                            {{'ABMPRODUCTOS.PRODUCTOSSUPPLIER' | translate}}
+                        </label>
+                        <select class="form-select mb-3" [(ngModel)]="id_proveedor" name="id_proveedor">
+                            <option value="0" disabled>
+                                {{'ABMPRODUCTOS.PRODUCTOSSELECTSUPPLIER' | translate}}
+                            </option>
+
+                            <option *ngFor="let prov of proveedores" value="{{ prov.id_proveedor }}">
+                                {{ prov.razon_social_proveedor }}
+                            </option>
+                        </select>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label class="form-label text-white">
+                            {{'ABMPRODUCTOS.PRODUCTOSSTOCK' | translate}}
+                        </label>
+                        <input type="text" class="form-control" placeholder="{{'ABMPRODUCTOS.PRODUCTOSSTOCK' | translate}}"
+                        name="stock" [(ngModel)]="stock">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label text-white">
+                            {{'ABMPRODUCTOS.PRODUCTOSPRICE' | translate}}
+                        </label>
+                        <input type="text" class="form-control" placeholder="{{'ABMPRODUCTOS.PRODUCTOSPRICE' | translate}}"
+                        name="importe" [(ngModel)]="importe">
                     </div>
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    {{'ABMPRODUCTOS.CANCEL' | translate}}
+                </button>
                 <button type="button" class="btn btn-warning" type="submit"> 
-                    Modificar
+                    {{'ABMPRODUCTOS.MODIFY' | translate}}
                     <i class="fa fa-pencil"></i>
                 </button>
             </div>
@@ -163,30 +251,27 @@
     <!-- Modal de borrar de productos -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content bg-dark">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"> Seguro que quiere borrar? </h5>
+            <h5 class="modal-title text-white" id="exampleModalLabel">
+                {{'ABMPRODUCTOS.SURE' | translate}}
+            </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
-            <a *ngIf="errorTypes === 1">
-                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                Falta completar el campo de nombre!
-            </a>
-            <a *ngIf="errorTypes === 2">
-                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                Falta completar el campo de teléfono!
-            </a>
         </div>
     
         <form (ngSubmit)="deleteProveedor()">
             <div class="modal-body">
-                    <h3>Seguro que lo quiere borrar?</h3>
+                    <h3 class="text-white">
+                        {{'ABMPRODUCTOS.SUREDELETE' | translate}}
+                    </h3>
     
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar </button>
-                <button type="button" class="btn btn-danger" type="submit"> Eliminar
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    {{'ABMPRODUCTOS.CANCEL' | translate}}
+                </button>
+                <button type="button" class="btn btn-danger" type="submit">
+                    {{'ABMPRODUCTOS.DELETE' | translate}}
                     <i class="fa fa-trash"></i>
                 </button>
             </div>
@@ -195,3 +280,4 @@
         
     </div>
     </div>
+</div>

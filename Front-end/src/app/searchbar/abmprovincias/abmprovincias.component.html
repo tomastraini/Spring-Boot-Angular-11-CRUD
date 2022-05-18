@@ -1,144 +1,181 @@
-<div class="separator"> 
-    CRUD de provincias
+<div *ngIf="provincias.length === 0" class="loadingScreen fadeInNav">
+    <div class="spinner-border text-primary" role="status">
+    </div>
+    <h3 class="text-white" [class.cargandoText]="lang == 'es'"
+    [class.cargandoTextEng]="lang != 'es'">
+        {{ 'ABMPROVINCIAS.LOADING' | translate }}
+    </h3>
 </div>
 
-<button class="btn btn-primary addButton" data-bs-toggle="modal" data-bs-target="#insertModal" (click)="insertOpen()">
-    <i class="fa fa-plus"></i>
-    <span> Agregar provincia </span>
-</button>
+<div *ngIf="provincias.length !== 0">
 
-<div class="shadow tableMark border border-light">
-    <h1 class="tableTitle text-decoration-underline">
-        Tabla de provincias
-    </h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Provincia</th>
-                <th scope="col">Acciones</th>
-            </tr>
-        </thead>
-        <tbody *ngFor="let data of provincias | provinciasFilter: busquedavalue">
-            <tr>
-                <td scope="row">{{ data.id_provincia }}</td>
-                <td>{{ data.provincia }}</td>
-                <td>
-                    <button class="btn btn-danger btnBorrar" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                    (click)="deleteOpen(data.id_provincia)">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                    <button class="btn btn-warning btnModificar" data-bs-toggle="modal" data-bs-target="#editModal"
-                    (click)="modifyOpen(data.id_provincia, data.provincia)">
-                        <i class="fa fa-pencil"></i>
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-<div class="separator"></div>
-
-<!-- Modal de carga de provincias -->
-<div class="modal fade " id="insertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-
-    <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"> Cargar provincia </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div class="separator">
+        {{ 'ABMPROVINCIAS.TITLE' | translate }}
     </div>
     
-    <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
-        <a *ngIf="errorTypes === 1">
-            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            Falta completar el campo de Provincia!
-        </a>
-    </div>
-
-    <form (ngSubmit)="insertProvincia()">
-        <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">Nombre de la provincia</label>
-                    <input type="text" class="form-control" placeholder="Provincia" name="provincia"
-                    [(ngModel)]="provincia">
-                </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" id="cerrarModalBTN" #closeModal data-bs-dismiss="modal"> Cerrar </button>
-            <button type="button" class="btn btn-primary" type="submit"> Cargar
-                <i class="fa fa-plus"></i>
-            </button>
-        </div>
-    </form>
+    <button class="btn btn-primary addButton" data-bs-toggle="modal" data-bs-target="#insertModal" (click)="insertOpen()">
+        <i class="fa fa-plus"></i>
+        <span>
+            {{ 'ABMPROVINCIAS.ADDPROVINCIA' | translate }}
+        </span>
+    </button>
+    
+    <div class="shadow tableMark border border-light">
+        <h1 class="tableTitle text-decoration-underline">
+            {{ 'ABMPROVINCIAS.TABLETITLE' | translate }}
+        </h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">
+                        {{ 'ABMPROVINCIAS.PROVINCIA' | translate }}
+                    </th>
+                    <th scope="col">
+                        {{ 'ABMPROVINCIAS.ACTIONS' | translate }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let data of provincias | provinciasFilter: busquedavalue">
+                <tr>
+                    <td scope="row">{{ data.id_provincia }}</td>
+                    <td>{{ data.provincia }}</td>
+                    <td>
+                        <button class="btn btn-danger btnBorrar" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                        (click)="deleteOpen(data.id_provincia)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                        <button class="btn btn-warning btnModificar" data-bs-toggle="modal" data-bs-target="#editModal"
+                        (click)="modifyOpen(data.id_provincia, data.provincia)">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     
-</div>
-</div>
-
-<!-- Modal de modificación de provincias -->
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-    <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"> Modificar provincia </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
+    <div class="separator"></div>
     
-    <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
-        <a *ngIf="errorTypes === 1">
-            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            Falta completar el campo de código provincia!
-        </a>
-    </div>
-
-    <form (ngSubmit)="modifyProvincia()">
-        <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">Nombre de la provincia</label>
-                    <input type="text" class="form-control" placeholder="Provincia" name="provincia"
-                    id="editProvincia"
-                    [(ngModel)]="provincia">
-                </div>
-
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cerrarModalBTNM"> Cerrar </button>
-            <button type="button" class="btn btn-warning" type="submit"> 
-                Modificar
-                    <i class="fa fa-pencil"></i>
-            </button>
-        </div>
-    </form>
-    </div>
+    <!-- Modal de carga de provincias -->
+    <div class="modal fade " id="insertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark">
     
-</div>
-</div>
-
-<!-- Modal de eliminación de provincias -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-    <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"> Seguro que quiere eliminar? </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body">
-        <form (ngSubmit)="deleteProvincia()">
+        <div class="modal-header">
+            <h5 class="modal-title text-white" id="exampleModalLabel">
+                {{ 'ABMPROVINCIAS.ADDPROVINCIA' | translate }}
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
+            <a *ngIf="errorTypes === 1">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                {{ 'ABMPROVINCIAS.LACKSPROVINCENAME' | translate }}
+            </a>
+        </div>
+    
+        <form (ngSubmit)="insertProvincia()">
             <div class="modal-body">
-                    <h3>Seguro que lo quiere borrar?</h3>
-    
+                    <div class="mb-3">
+                        <label class="form-label text-white">
+                            {{ 'ABMPROVINCIAS.PROVINCIA' | translate }}
+                        </label>
+                        <input type="text" class="form-control" placeholder="{{ 'ABMPROVINCIAS.PROVINCIA' | translate }}" name="provincia"
+                        [(ngModel)]="provincia">
+                    </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cerrarModalBTNE"> Cerrar </button>
-                <button type="button" class="btn btn-danger" type="submit"> Eliminar
-                    <i class="fa fa-trash"></i>
+                <button type="button" class="btn btn-secondary" id="cerrarModalBTN" #closeModal data-bs-dismiss="modal">
+                    {{ 'ABMPROVINCIAS.CLOSE' | translate }}
+                </button>
+                <button type="button" class="btn btn-primary" type="submit">
+                    {{ 'ABMPROVINCIAS.ADD' | translate }}
+                    <i class="fa fa-plus"></i>
                 </button>
             </div>
         </form>
-
+        </div>
+        
+    </div>
+    </div>
+    
+    <!-- Modal de modificación de provincias -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark">
+        <div class="modal-header">
+            <h5 class="modal-title text-white" id="exampleModalLabel">
+                {{ 'ABMPROVINCIAS.MODIFYPROVINCIA' | translate }}
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
+            <a *ngIf="errorTypes === 1">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                {{ 'ABMPROVINCIAS.LACKSPROVINCENAME' | translate }}
+            </a>
+        </div>
+    
+        <form (ngSubmit)="modifyProvincia()">
+            <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label text-white">
+                            {{ 'ABMPROVINCIAS.PROVINCIA' | translate }}
+                        </label>
+                        <input type="text" class="form-control" placeholder="Provincia" name="provincia"
+                        id="editProvincia"
+                        [(ngModel)]="provincia">
+                    </div>
+    
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cerrarModalBTNM"> Cerrar </button>
+                <button type="button" class="btn btn-warning" type="submit"> 
+                    {{ 'ABMPROVINCIAS.MODIFY' | translate }}
+                    <i class="fa fa-pencil"></i>
+                </button>
+            </div>
+        </form>
+        </div>
+        
+    </div>
+    </div>
+    
+    <!-- Modal de eliminación de provincias -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark">
+        <div class="modal-header">
+            <h5 class="modal-title text-white" id="exampleModalLabel">
+                {{ 'ABMPROVINCIAS.SURE' | translate }}
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form (ngSubmit)="deleteProvincia()">
+                <div class="modal-body">
+                        <h3 class="text-white">
+                            {{ 'ABMPROVINCIAS.SUREDELETE' | translate }}
+                        </h3>
+        
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cerrarModalBTNE">
+                        {{ 'ABMPROVINCIAS.CLOSE' | translate }}
+                    </button>
+                    <button type="button" class="btn btn-danger" type="submit">
+                        {{ 'ABMPROVINCIAS.DELETE' | translate }}
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+            </form>
+    
+        </div>
+    </div>
+    </div>
     </div>
 </div>
-</div>
-</div>
+

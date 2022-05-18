@@ -1,11 +1,16 @@
 package com.example.CRUD.Services;
 
+import com.example.CRUD.DTOs.EnviosDTO;
+import com.example.CRUD.Models.Clientes;
 import com.example.CRUD.Models.Envios;
+import com.example.CRUD.Models.Localidades;
 import com.example.CRUD.Repositories.ClientesRepo;
 import com.example.CRUD.Repositories.EnviosRepo;
+import com.example.CRUD.Repositories.LocalidadesRepo;
 import com.example.CRUD.Services.Interfaces.IEnviosService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -14,17 +19,34 @@ public class EnviosService implements IEnviosService
 {
     public EnviosRepo repo;
     public ClientesRepo clientesRepo;
-
-    public EnviosService(EnviosRepo repo, ClientesRepo clientesRepo)
+    public LocalidadesRepo localidadesRepo;
+    public EnviosService(EnviosRepo repo, ClientesRepo clientesRepo, LocalidadesRepo localidadesRepo)
     {
         this.repo = repo;
         this.clientesRepo = clientesRepo;
+        this.localidadesRepo = localidadesRepo;
     }
 
     @Override
-    public List<Envios> getEnvios()
+    public List<EnviosDTO> getEnvios()
     {
-        return repo.findAll();
+        List<Envios> envios = repo.findAll();
+        List<Clientes> clientes = clientesRepo.findAll();
+        List<Localidades> loc = localidadesRepo.findAll();
+        List<EnviosDTO> response = new ArrayList<EnviosDTO>();
+        envios.forEach(envio -> {
+            response.add(new EnviosDTO(envio.getId_envio(), 
+            envio.get_id(), 
+            envio.getId_cliente(), 
+            clientes.stream()
+                .filter(cliente -> cliente.getId() == envio.getId_cliente()).findFirst().get().getrazon_social(),
+            loc.stream()
+                .filter(localidad -> localidad.getCp() == clientes.stream()
+                    .filter(cliente -> cliente.getId() == envio.getId_cliente()).findFirst().get().getCp()).findFirst().get().getLocalidad(),
+                    envio.getTelefono(), envio.getFecha(), envio.getDireccion(), envio.getCosto()));
+        });
+
+        return response;
     }
 
     @Override
@@ -37,8 +59,8 @@ public class EnviosService implements IEnviosService
 
         if(!clientesRepo.findAll().stream().anyMatch(x -> x.id_cliente == envios.id_cliente)){ return null; }
 
-        int lastId = repo.findAll().size();
-        envios.setId_envio(lastId + 1);
+        int id_envio = repo.findAll().stream().mapToInt(x -> x.id_envio).max().orElse(0) + 1;
+        envios.setId_envio(id_envio);
 
         repo.save(envios);
         return envios;
@@ -58,12 +80,21 @@ public class EnviosService implements IEnviosService
 
         if(!repo.findAll().stream().anyMatch(x -> x.id_envio == envios.id_envio)){ return null; }
 
-        repo.save(envios);
+        Envios envioToSave = repo.findAll()
+                .stream().filter(x -> x.id_envio == envios.id_envio)
+                .findFirst().get();
+        envioToSave.costo = envios.costo;
+        envioToSave.id_cliente = envios.id_cliente;
+        envioToSave.telefono = envios.telefono;
+        envioToSave.direccion = envios.direccion;
+        envioToSave.fecha = envios.fecha;
+
+        repo.save(envioToSave);
         return envios;
     }
 
     @Override
-    public void deleteEnvios(int id)
+    public void deleteEnvios(Long id)
     {
         repo.findAll().stream().filter(x -> x.id_envio == id).forEach(x -> repo.delete(x));
     }

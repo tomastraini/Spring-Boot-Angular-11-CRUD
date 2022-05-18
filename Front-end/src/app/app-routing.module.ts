@@ -12,6 +12,7 @@ import { AbmproveedoresComponent } from './searchbar/abmproveedores/abmproveedor
 import { DetalleventasComponent } from './searchbar/detalleventas/detalleventas.component';
 import { AbmproductosComponent } from './searchbar/abmproductos/abmproductos.component';
 import { HistorialventasComponent } from './searchbar/historialventas/historialventas.component';
+import { AbmenviosComponent } from './searchbar/abmenvios/abmenvios.component';
 
 const routes: Routes = [
   {
@@ -58,6 +59,10 @@ const routes: Routes = [
       {
         path: 'history',
         component: HistorialventasComponent
+      },
+      {
+        path: 'abmenvios',
+        component: AbmenviosComponent
       },
     ]
   },

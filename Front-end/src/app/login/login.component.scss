@@ -361,7 +361,6 @@ nav
   max-width: 50%;
   margin-left: auto;
   margin-right: auto;
-  // show elements alligned to center vertically
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -378,3 +377,41 @@ nav
   
 }
 
+
+@media (max-width: 767px)
+{
+  .fadeInDown
+  {
+    padding-bottom: 55%;
+
+  }
+
+  .mainForm
+  {
+    padding-bottom: 10%;
+  }
+
+  .sessionStart
+  {
+    margin-left: auto;
+    margin-right: 25%;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    transition: all .3s;
+    outline: none;
+    &:focus
+    {
+        border: 1px solid #00bcd4;
+    }
+  }
+
+  .backbtn
+  {
+    margin: 0 auto;
+    margin-left: -30%;
+    margin-top: 20%;
+  }
+}

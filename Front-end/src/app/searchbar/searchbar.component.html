@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-dark fadeInNav">
     <div class="container-fluid">
         <a class="navbar-brand border border-danger rounded-pill titleNavBar"  href="/"> 
-            ABM System 
+            {{ 'MENU.NAVBRAND' | translate}} 
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -10,46 +10,60 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
             <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+            <a class="nav-link active" aria-current="page" href="/">
+                {{ 'MENU.HOME' | translate}}
+            </a>
             </li>
 
             <div class="dropdown">
                  <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        ABM's
+                    {{ 'MENU.CRUDS' | translate}}
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><a class="dropdown-item" (click)="goAbmClientes()"> ABM Clientes </a></li>
-                  <li><a class="dropdown-item" (click)="goAbmLocalidades()"> ABM Localidades </a></li>
-                  <li><a class="dropdown-item" (click)="goAbmProvincias()"> ABM Provincias </a></li>
-                  <li><a class="dropdown-item" (click)="goAbmProveedores()"> ABM Proveedores </a></li>
-                  <li><a class="dropdown-item" (click)="goAbmProductos()"> ABM Productos </a></li>
+                  <li><a class="dropdown-item" (click)="goAbmClientes()"> {{ 'MENU.ABMCLIENTES' | translate}} </a></li>
+                  <li><a class="dropdown-item" (click)="goAbmLocalidades()"> {{ 'MENU.ABMLOCALIDADES' | translate}} </a></li>
+                  <li><a class="dropdown-item" (click)="goAbmProvincias()"> {{ 'MENU.ABMPROVINCIAS' | translate}} </a></li>
+                  <li><a class="dropdown-item" (click)="goAbmProveedores()"> {{ 'MENU.ABMPROVEEDORES' | translate}} </a></li>
+                  <li><a class="dropdown-item" (click)="goAbmProductos()"> {{ 'MENU.ABMPRODUCTOS' | translate}} </a></li>
+                    <li><a class="dropdown-item" (click)="goEnvios()"> {{ 'MENU.ABMENVIOS' | translate}} </a></li>
                 </ul>
               </div>
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" data-bs-toggle="modal" data-bs-target="#detalleVentasModel">Cargar venta</a>
+                <a class="nav-link active" aria-current="page" data-bs-toggle="modal" data-bs-target="#detalleVentasModel">
+                    {{ 'MENU.UPLOADSALE' | translate}}
+                </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" (click)="goHistorialVentas()"> Historial de ventas </a>
+                <a class="nav-link active" aria-current="page" (click)="goHistorialVentas()"> 
+                    {{ 'MENU.SALESHISTORY' | translate}}
+                </a>
             </li>
 
             <li class="nav-item">
-            <a class="nav-link" (click)="goAbout()">Sobre nosotros</a>
+            <a class="nav-link" (click)="goAbout()">
+                {{ 'MENU.ABOUT' | translate}}
+            </a>
             </li>
         </ul>
+        <button class="btn btn-danger langButton" (click)="changeLang()"> 
+          <i class="fa fa-language" aria-hidden="true"></i> 
+        </button>
 
-        <button class="btn btn-danger mr-2" (click)="cerrarSession()">
-            Cerrar sesión
+        <button class="btn btn-danger mr-2 closeSession" (click)="cerrarSession()">
+            {{ 'MENU.LOGOUT' | translate}}
         </button>
     
         <div class="searchVideos d-flex">
-            <input class="form-control me-2"   placeholder="Buscar..."
+            <input class="form-control me-2"   placeholder="{{ 'MENU.SEARCH' | translate}}"
             name="busquedavalue" 
             mdbInput
             [(ngModel)]="busquedavalue"
             type="search" placeholder="Buscar" aria-label="Search">
             
-            <button class="btn btn-outline-danger" type="submit">Buscar</button>
+            <button class="btn btn-outline-danger" type="submit">
+                {{ 'MENU.SEARCH' | translate}}
+            </button>
             
         </div>
     
@@ -64,6 +78,7 @@
     <app-abmprovincias *ngIf="view !== null && view == 'abmprovincias'" [busquedavalue]="busquedavalue"></app-abmprovincias>
     <app-abmproveedores *ngIf="view !== null && view == 'abmproveedores'" [busquedavalue]="busquedavalue"></app-abmproveedores>
     <app-abmproductos *ngIf="view !== null && view == 'abmproductos'" [busquedavalue]="busquedavalue"></app-abmproductos>
+    <app-abmenvios *ngIf="view !== null && view == 'abmenvios'" [busquedavalue]="busquedavalue"></app-abmenvios>
     <app-detalleventas *ngIf="view !== null && view == 'vender'" [busquedavalue]="busquedavalue"> </app-detalleventas>
     <app-historialventas *ngIf="view !== null && view == 'history'" [busquedavalue]="busquedavalue"></app-historialventas>
     <app-page-not-found *ngIf="view !== null && view == 'pagenotfound'"></app-page-not-found>
@@ -74,7 +89,9 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content bg-dark">
         <div class="modal-header">
-          <h5 class="modal-title text-white" id="exampleModalLabel"> Cargar venta </h5>
+          <h5 class="modal-title text-white" id="exampleModalLabel"> 
+            {{ 'MENU.UPLOADSALE' | translate}}
+          </h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
@@ -83,7 +100,9 @@
             
             <div class="modal-body">
                     <div class="mb-3">
-                        <label class="form-label">Nombre del cliente</label>
+                        <label class="form-label">
+                            {{ 'MENU.CLIENTNAME' | translate}}
+                        </label>
                         <select class="form-select mb-3" [(ngModel)]="id_cliente" name="id_cliente">
                             <option *ngFor="let cli of clientes" value="{{ cli.id_cliente }}">
                                 {{ cli.razon_social }}
@@ -91,7 +110,9 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label"> Forma de pago </label>
+                        <label class="form-label"> 
+                            {{ 'MENU.PAYMENTMETHOD' | translate}}
+                        </label>
                         <select class="form-select mb-3" [(ngModel)]="id_forma_pago" name="id_forma_pago">
                             <option *ngFor="let formas of FormasPago" value="{{ formas.id_forma_pago }}">
                                 {{ formas.forma_pago }}
@@ -101,8 +122,12 @@
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btn-primary">Empezar venta</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            {{ 'MENU.CLOSE' | translate}}
+          </button>
+          <button type="submit" class="btn btn-primary">
+            {{ 'MENU.STARTSALE' | translate}}
+          </button>
         </div>
 
         </form>

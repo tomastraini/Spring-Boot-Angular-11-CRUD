@@ -1,143 +1,130 @@
-<div class="separator"> 
-    CRUD de proveedores
+
+<div *ngIf="proveedores === undefined" class="loadingScreen fadeInNav">
+    <div class="spinner-border text-primary" role="status">
+    </div>
+    <h3 class="text-white cargandoText">
+        {{"ABMPROVEEDORES.LOADING" | translate}}
+    </h3>
 </div>
 
-<button class="btn btn-primary addButton" data-bs-toggle="modal" data-bs-target="#insertModal">
-    <i class="fa fa-plus"></i>
-    <span> Agregar proveedor </span>
-</button>
 
-<div class="shadow tableMark border border-light">
-    <h1 class="tableTitle text-decoration-underline">
-        Tabla de proveedores
-    </h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Razon Social</th>
-                <th scope="col">Teléfono</th>
-                <th scope="col">Localidad</th>
-                <th scope="col">Acciones</th>
-            </tr>
-        </thead>
-        <tbody *ngFor="let data of proveedores | proveedoresFilter: busquedavalue">
-            <tr>
-                <td scope="row">{{ data.id_proveedor }}</td>
-                <td>{{ data.razon_social_proveedor }}</td>
-                <td>{{ data.telefono_proveedor }}</td>
-                <td>{{ data.localidad }}</td>
-                <td>
-                    <button class="btn btn-danger btnBorrar" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                    (click)="deleteOpen(data.id_proveedor)">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                    <button class="btn btn-warning btnModificar" data-bs-toggle="modal" data-bs-target="#editModal"
-                    (click)="modifyOpen(data.id_proveedor, data.razon_social_proveedor, data.telefono_proveedor, data.cp)">
-                        <i class="fa fa-pencil"></i>
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-<div class="separator"></div>
-
-
-
-  
-<!-- Modal de carga de proveedores -->
-<div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-    <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"> Cargar proveedor</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
-        <a *ngIf="errorTypes === 1">
-            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            Falta completar el campo de nombre!
-        </a>
-        <a *ngIf="errorTypes === 2">
-            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            Falta completar el campo de teléfono!
-        </a>
-    </div>
-
-    <form (ngSubmit)="insertProveedor()">
-        <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">Nombre del proveedor</label>
-                    <input type="text" class="form-control" placeholder="Nombre" name="nombre" [(ngModel)]="nombre">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Telefono</label>
-                    <input type="text" class="form-control" placeholder="Teléfono" name="telefono" [(ngModel)]="telefono">
-                </div>
-
-                <select class="form-select mb-3" [(ngModel)]="cp" name="cp">
-                    <option *ngFor="let loc of localidades" value="{{ loc.cp }}">
-                        {{ loc.localidad }}
-                    </option>
-                </select>
-
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar </button>
-            <button type="button" class="btn btn-primary" type="submit"> Cargar
-                <i class="fa fa-plus"></i>
-            </button>
-        </div>
-    </form>
+<div *ngIf="proveedores !== undefined">
+    <div class="separator">
+        {{"ABMPROVEEDORES.TITLE" | translate}}
     </div>
     
-</div>
-</div>
-
-<!-- Modal de modificar de proveedores -->
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <button class="btn btn-primary addButton" data-bs-toggle="modal" data-bs-target="#insertModal">
+        <i class="fa fa-plus"></i>
+        <span>
+            {{"ABMPROVEEDORES.ADDPROVEEDOR" | translate}}
+        </span>
+    </button>
+    
+    <div class="shadow tableMark border border-light">
+        <h1 class="tableTitle text-decoration-underline">
+            {{"ABMPROVEEDORES.TABLETITLE" | translate}}
+        </h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">
+                        {{"ABMPROVEEDORES.NOMBREPROVEEDOR" | translate}}
+                    </th>
+                    <th scope="col">
+                        {{"ABMPROVEEDORES.PHONEPROVEEDOR" | translate}}
+                    </th>
+                    <th scope="col">
+                        {{"ABMPROVEEDORES.LOCALIDADPROVEEDOR" | translate}}
+                    </th>
+                    <th scope="col">
+                        {{"ABMPROVEEDORES.ACTIONS" | translate}}
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let data of proveedores | proveedoresFilter: busquedavalue">
+                <tr>
+                    <td scope="row">{{ data.id_proveedor }}</td>
+                    <td>{{ data.razon_social_proveedor }}</td>
+                    <td>{{ data.telefono_proveedor }}</td>
+                    <td>{{ data.localidad }}</td>
+                    <td>
+                        <button class="btn btn-danger btnBorrar" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                        (click)="deleteOpen(data.id_proveedor)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                        <button class="btn btn-warning btnModificar" data-bs-toggle="modal" data-bs-target="#editModal"
+                        (click)="modifyOpen(data.id_proveedor, data.razon_social_proveedor, data.telefono_proveedor, data.cp)">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="separator"></div>
+    
+    
+    
+      
+    <!-- Modal de carga de proveedores -->
+    <div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content bg-dark">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"> Modificar proveedores</h5>
+            <h5 class="modal-title text-white" id="exampleModalLabel">
+                {{"ABMPROVEEDORES.ADDPROVEEDOR" | translate}}
+            </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
             <a *ngIf="errorTypes === 1">
                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                Falta completar el campo de nombre!
+                {{"ABMPROVEEDORES.LACKNOMBREPROVEEDOR" | translate}}
             </a>
             <a *ngIf="errorTypes === 2">
                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                Falta completar el campo de teléfono!
+                {{"ABMPROVEEDORES.LACKPHONEPROVEEDOR" | translate}}
             </a>
         </div>
     
-        <form (ngSubmit)="modifyProveedor()">
+        <form (ngSubmit)="insertProveedor()">
             <div class="modal-body">
                     <div class="mb-3">
-                        <label class="form-label">Nombre del proveedores</label>
+                        <label class="form-label text-white">
+                            {{"ABMPROVEEDORES.NOMBREPROVEEDOR" | translate}}
+                        </label>
                         <input type="text" class="form-control" placeholder="Nombre" name="nombre" [(ngModel)]="nombre">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Telefono</label>
+                        <label class="form-label text-white">
+                            {{"ABMPROVEEDORES.PHONEPROVEEDOR" | translate}}
+                        </label>
                         <input type="text" class="form-control" placeholder="Teléfono" name="telefono" [(ngModel)]="telefono">
                     </div>
-    
-                    <select class="form-select mb-3" [(ngModel)]="cp" name="cp">
-                        <option *ngFor="let loc of localidades" value="{{ loc.cp }}">
-                            {{ loc.localidad }}
-                        </option>
-                    </select>
+                    <div class="mb-3">
+                        <label class="form-label text-white">
+                            {{"ABMPROVEEDORES.LOCALIDADPROVEEDOR" | translate}}
+                        </label>
+                        <select class="form-select mb-3" [(ngModel)]="cp" name="cp">
+                            <option value="0">
+                                {{"ABMPROVEEDORES.LOCALIDADSELECTPROVEEDOR" | translate}}
+                            </option>
+                            <option *ngFor="let loc of localidades" value="{{ loc.cp }}">
+                                {{ loc.localidad }}
+                            </option>
+                        </select>
+                    </div>
     
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar </button>
-                <button type="button" class="btn btn-warning" type="submit"> 
-                    Modificar
-                    <i class="fa fa-pencil"></i>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    {{"ABMPROVEEDORES.CANCEL" | translate}}
+                </button>
+                <button type="button" class="btn btn-primary" type="submit">
+                    {{"ABMPROVEEDORES.ADD" | translate}}
+                    <i class="fa fa-plus"></i>
                 </button>
             </div>
         </form>
@@ -145,39 +132,111 @@
         
     </div>
     </div>
-
-    <!-- Modal de borrar de proveedores -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel"> Seguro que quiere borrar? </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
-            <a *ngIf="errorTypes === 1">
-                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                Falta completar el campo de nombre!
-            </a>
-            <a *ngIf="errorTypes === 2">
-                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                Falta completar el campo de teléfono!
-            </a>
-        </div>
     
-        <form (ngSubmit)="deleteProveedor()">
-            <div class="modal-body">
-                    <h3>Seguro que lo quiere borrar?</h3>
-    
+    <!-- Modal de modificar de proveedores -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark">
+            <div class="modal-header">
+                <h5 class="modal-title text-white" id="exampleModalLabel">
+                    {{"ABMPROVEEDORES.MODIFYPROVEEDOR" | translate}}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar </button>
-                <button type="button" class="btn btn-danger" type="submit"> Eliminar
-                    <i class="fa fa-trash"></i>
-                </button>
+            <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
+                <a *ngIf="errorTypes === 1">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    {{"ABMPROVEEDORES.LACKNOMBREPROVEEDOR" | translate}}
+                </a>
+                <a *ngIf="errorTypes === 2">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    {{"ABMPROVEEDORES.LACKPHONEPROVEEDOR" | translate}}
+                </a>
             </div>
-        </form>
-        </div>
         
-    </div>
-    </div>
+            <form (ngSubmit)="modifyProveedor()">
+                <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label text-white">
+                                {{"ABMPROVEEDORES.NOMBREPROVEEDOR" | translate}}
+                            </label>
+                            <input type="text" class="form-control" placeholder="Nombre" name="nombre" [(ngModel)]="nombre">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-white">
+                                {{"ABMPROVEEDORES.PHONEPROVEEDOR" | translate}}
+                            </label>
+                            <input type="text" class="form-control" placeholder="Teléfono" name="telefono" [(ngModel)]="telefono">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-white">
+                                {{"ABMPROVEEDORES.LOCALIDADPROVEEDOR" | translate}}
+                            </label>
+                            <select class="form-select mb-3" [(ngModel)]="cp" name="cp">
+                                <option value="0" disabled>
+                                    {{"ABMPROVEEDORES.LOCALIDADSELECTPROVEEDOR" | translate}}
+                                </option>
+                                <option *ngFor="let loc of localidades" value="{{ loc.cp }}">
+                                    {{ loc.localidad }}
+                                </option>
+                            </select>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        {{"ABMPROVEEDORES.CANCEL" | translate}}
+                    </button>
+                    <button type="button" class="btn btn-warning" type="submit"> 
+                        {{"ABMPROVEEDORES.MODIFY" | translate}}
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                </div>
+            </form>
+            </div>
+            
+        </div>
+        </div>
+    
+        <!-- Modal de borrar de proveedores -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark">
+            <div class="modal-header">
+                <h5 class="modal-title text-white" id="exampleModalLabel">
+                    {{"ABMPROVEEDORES.SURE" | translate}}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
+                <a *ngIf="errorTypes === 1">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    {{"ABMPROVEEDORES.LACKNOMBREPROVEEDOR" | translate}}
+                </a>
+                <a *ngIf="errorTypes === 2">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    {{"ABMPROVEEDORES.LACKPHONEPROVEEDOR" | translate}}
+                </a>
+            </div>
+        
+            <form (ngSubmit)="deleteProveedor()">
+                <div class="modal-body">
+                        <h3 class="text-white">
+                            {{"ABMPROVEEDORES.SUREDELETE" | translate}}
+                        </h3>
+        
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        {{"ABMPROVEEDORES.CANCEL" | translate}}
+                    </button>
+                    <button type="button" class="btn btn-danger" type="submit">
+                        {{"ABMPROVEEDORES.DELETE" | translate}}
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+            </form>
+            </div>
+            
+        </div>
+        </div>
+</div>

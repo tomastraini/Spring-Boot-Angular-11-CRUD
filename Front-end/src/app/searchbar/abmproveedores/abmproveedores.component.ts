@@ -11,7 +11,7 @@ export class AbmproveedoresComponent implements OnInit {
   constructor(private appComponent: AppComponent, public http: HttpClient) { }
 
   @Input() busquedavalue: any;
-  proveedores: any[] = [];
+  proveedores: any;
   localidades: any[] = [];
   id = 0;
   nombre = '';

@@ -12,8 +12,9 @@ export class LocalidadesComponent implements OnInit {
   constructor(private appComponent: AppComponent, public http: HttpClient) { }
   @Input() busquedavalue: any;
   
+  lang = this.appComponent.actualLang();
   cp: any;
-  id_provincia: any;
+  id_provincia = 0;
   localidad: any;
 
   localidades: any;
@@ -57,16 +58,12 @@ export class LocalidadesComponent implements OnInit {
 
   insertLocalidad(): void
   {
-    console.log(this.cp);
-    console.log(this.id_provincia);
-    console.log(this.localidad);
-    
     if (this.cp == null || this.cp == '')
     {
       this.errorTypes = 1;
       return;
     }
-    if(this.id_provincia == null || this.id_provincia == '')
+    if(this.id_provincia == null || this.id_provincia == 0)
     {
       this.errorTypes = 2;
       return;
@@ -92,7 +89,7 @@ export class LocalidadesComponent implements OnInit {
       }
     });
     this.cp = null;
-    this.id_provincia = null;
+    this.id_provincia = 0;
     this.localidad = null;
   }
 
@@ -103,7 +100,7 @@ export class LocalidadesComponent implements OnInit {
       this.errorTypes = 1;
       return;
     }
-    if(this.id_provincia == null || this.id_provincia == '')
+    if(this.id_provincia == null || this.id_provincia == 0)
     {
       this.errorTypes = 2;
       return;
@@ -128,7 +125,7 @@ export class LocalidadesComponent implements OnInit {
       }
     });
     this.cp = null;
-    this.id_provincia = null;
+    this.id_provincia = 0;
     this.localidad = null;
   }
 
