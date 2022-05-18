@@ -40,51 +40,12 @@ export class SearchbarComponent implements OnInit {
       });
     });
 
+    this.view = this.router.url.replace(/^\/|\/$/g, '');
+  }
 
-    if (this.router.url === '/')
-    {
-      this.view = '';
-    }
-    else if (this.router.url.includes('search'))
-    {
-      this.view = 'search';
-    }
-    else if (this.router.url.includes('about'))
-    {
-      this.view = 'about';
-    }
-    else if (this.router.url.includes('abmclientes'))
-    {
-      this.view = 'abmclientes';
-    }
-    else if (this.router.url.includes('abmlocalidades'))
-    {
-      this.view = 'abmlocalidades';
-    }
-    else if (this.router.url.includes('abmprovincias'))
-    {
-      this.view = 'abmprovincias';
-    }
-    else if (this.router.url.includes('abmproveedores'))
-    {
-      this.view = 'abmproveedores';
-    }
-    else if (this.router.url.includes('vender'))
-    {
-      this.view = 'vender';
-    }
-    else if (this.router.url.includes('abmproductos'))
-    {
-      this.view = 'abmproductos';
-    }
-    else if (this.router.url.includes('history'))
-    {
-      this.view = 'history';
-    }
-    else
-    {
-      this.view = 'pagenotfound';
-    }
+  changeLang()
+  {
+    this.appComponent.changeLanguage();
   }
 
   goAbout(): void
@@ -127,9 +88,20 @@ export class SearchbarComponent implements OnInit {
     window.location.href = '/history';
   }
 
+  goEnvios(): void
+  {
+    window.location.href = '/abmenvios';
+  }
+
   cerrarSession(): void
   {
+    var lang = sessionStorage.getItem('lang');
     sessionStorage.clear();
+    if(lang != null)
+    {
+      sessionStorage.setItem('lang', lang);
+    }
+    
     window.location.href = '/login';
   }
 

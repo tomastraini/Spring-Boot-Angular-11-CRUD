@@ -1,23 +1,44 @@
-<div class="separator"> 
-    CRUD de localidades
+
+<div *ngIf="localidades === undefined" class="loadingScreen fadeInNav">
+    <div class="spinner-border text-primary" role="status">
+    </div>
+    <h3 class="text-white"[class.cargandoText]="lang == 'es'"
+    [class.cargandoTextEng]="lang != 'es'">
+        {{'ABMLOCALIDADES.LOADING' | translate}}
+    </h3>
+</div>
+
+
+<div *ngIf="localidades !== undefined">
+    
+<div class="separator">
+    {{'ABMLOCALIDADES.TITLE' | translate}}
 </div>
 
 <button class="btn btn-primary addButton" data-bs-toggle="modal" data-bs-target="#insertModal">
     <i class="fa fa-plus"></i>
-    <span> Agregar localidad </span>
+    <span>
+        {{'ABMLOCALIDADES.ADDLOCALIDAD' | translate}}
+    </span>
 </button>
 
 <div class="shadow tableMark border border-light">
     <h1 class="tableTitle text-decoration-underline">
-        Tabla de localidades
+        {{'ABMLOCALIDADES.LOCALIDADESTABLE' | translate}}
     </h1>
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Localidad</th>
-                <th scope="col">Provincia</th>
-                <th scope="col">Acciones</th>
+                <th scope="col">
+                    {{'ABMLOCALIDADES.LOCALIDAD' | translate}}
+                </th>
+                <th scope="col">
+                    {{'ABMLOCALIDADES.PROVINCIA' | translate}}
+                </th>
+                <th scope="col">
+                    {{'ABMLOCALIDADES.ACTIONS' | translate}}
+                </th>
             </tr>
         </thead>
         <tbody *ngFor="let data of localidades | localidadesFilter: busquedavalue">
@@ -45,49 +66,69 @@
 <!-- Modal de carga de localidades -->
 <div class="modal fade" id="insertModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+    <div class="modal-content bg-dark">
     <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"> Cargar localidades </h5>
+        <h5 class="modal-title text-white" id="exampleModalLabel">
+            {{'ABMLOCALIDADES.ADDLOCALIDAD' | translate}}
+        </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     
     <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
         <a *ngIf="errorTypes === 1">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            Falta completar el campo de código postal!
+            {{'ABMLOCALIDADES.LACKZIP' | translate}}
         </a>
         <a *ngIf="errorTypes === 2">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            Falta completar el campo de provincia!
+            {{'ABMLOCALIDADES.LACKPROVINCIA' | translate}}
         </a>
         <a *ngIf="errorTypes === 3">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            Falta completar el campo de localidad!
+            {{'ABMLOCALIDADES.LACKLOCALIDAD' | translate}}'}}
         </a>
     </div>
 
     <form (ngSubmit)="insertLocalidad()">
         <div class="modal-body">
                 <div class="mb-3">
-                    <label class="form-label">Código postal</label>
-                    <input type="text" class="form-control" placeholder="Código postal" name="cp" [(ngModel)]="cp">
+                    <label class="form-label text-white">
+                        {{'ABMLOCALIDADES.ZIPFIELD' | translate}}
+                    </label>
+                    <input type="text" class="form-control" placeholder="{{'ABMLOCALIDADES.ZIPFIELD' | translate}}"
+                    name="cp" [(ngModel)]="cp">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Nombre de la Localidad</label>
-                    <input type="text" class="form-control" placeholder="Localidad" name="localidad" [(ngModel)]="localidad">
+                    <label class="form-label text-white">
+                        {{'ABMLOCALIDADES.LOCALIDADFIELD' | translate}}
+                    </label>
+                    <input type="text" class="form-control" placeholder="{{'ABMLOCALIDADES.LOCALIDADFIELD' | translate}}" 
+                    name="localidad" [(ngModel)]="localidad">
                 </div>
 
-
-                <select class="form-select mb-3" [(ngModel)]="id_provincia" name="id_provincia">
-                    <option *ngFor="let pro of provincias" value="{{ pro.id_provincia }}">
-                        {{ pro.provincia }}
-                    </option>
-                </select>
+                <div class="mb-3">
+                    <label class="form-label text-white">
+                        {{'ABMLOCALIDADES.PROVINCIAFIELD' | translate}}
+                    </label>
+                    <select class="form-select mb-3" [(ngModel)]="id_provincia" name="id_provincia">
+                        <option disabled value="0">
+                            {{'ABMLOCALIDADES.SELECTPROVINCIA' | translate}}
+                        </option>
+                        
+                        <option *ngFor="let pro of provincias" value="{{ pro.id_provincia }}">
+                            {{ pro.provincia }}
+                        </option>
+                    </select>
+                </div>
+                
 
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar </button>
-            <button type="button" class="btn btn-primary" type="submit"> Cargar
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                {{'ABMLOCALIDADES.CLOSE' | translate}}
+            </button>
+            <button type="button" class="btn btn-primary" type="submit">
+                {{'ABMLOCALIDADES.ADD' | translate}}
                 <i class="fa fa-plus"></i>
             </button>
         </div>
@@ -100,51 +141,69 @@
 <!-- Modal de modificación de localidades -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+    <div class="modal-content bg-dark">
     <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"> Modificar localidades </h5>
+        <h5 class="modal-title text-white" id="exampleModalLabel">
+            {{'ABMLOCALIDADES.MODIFYLOCALIDAD' | translate}}
+        </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     
     <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
         <a *ngIf="errorTypes === 1">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            Falta completar el campo de código postal!
+            {{'ABMLOCALIDADES.LACKZIP' | translate}}
         </a>
         <a *ngIf="errorTypes === 2">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            Falta completar el campo de localidad!
+            {{'ABMLOCALIDADES.LACKPROVINCIA' | translate}}
         </a>
         <a *ngIf="errorTypes === 3">
             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            Falta completar el campo de provincia!
+            {{'ABMLOCALIDADES.LACKLOCALIDAD' | translate}}'}}
         </a>
     </div>
 
     <form (ngSubmit)="modifyLocalidad()">
         <div class="modal-body">
                 <div class="mb-3">
-                    <label class="form-label">Código postal</label>
-                    <input type="text" class="form-control" placeholder="Código postal" name="cp" [(ngModel)]="cp">
+                    <label class="form-label text-white">
+                        {{'ABMLOCALIDADES.ZIPFIELD' | translate}}
+                    </label>
+                    <input type="text" class="form-control" placeholder="{{'ABMLOCALIDADES.ZIPFIELD' | translate}}"
+                    name="cp" [(ngModel)]="cp">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Nombre de la Localidad</label>
-                    <input type="text" class="form-control" placeholder="Localidad" name="localidad" [(ngModel)]="localidad">
+                    <label class="form-label text-white">
+                        {{'ABMLOCALIDADES.LOCALIDADFIELD' | translate}}
+                    </label>
+                    <input type="text" class="form-control" placeholder="{{'ABMLOCALIDADES.LOCALIDADFIELD' | translate}}"
+                    name="localidad" [(ngModel)]="localidad">
                 </div>
 
-
-                <select class="form-select mb-3" [(ngModel)]="id_provincia" name="id_provincia">
-                    <option *ngFor="let pro of provincias" value="{{ pro.id_provincia }}">
-                        {{ pro.provincia }}
-                    </option>
-                </select>
+                <div class="mb-3">
+                    <label class="form-label text-white">
+                        {{'ABMLOCALIDADES.PROVINCIAFIELD' | translate}}
+                    </label>
+                    <select class="form-select mb-3" [(ngModel)]="id_provincia" name="id_provincia">
+                        <option disabled value="0">
+                            {{'ABMLOCALIDADES.SELECTPROVINCIA' | translate}}
+                        </option>
+                        
+                        <option *ngFor="let pro of provincias" value="{{ pro.id_provincia }}">
+                            {{ pro.provincia }}
+                        </option>
+                    </select>
+                </div>
 
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar </button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                {{'ABMLOCALIDADES.CLOSE' | translate}}
+            </button>
             <button type="button" class="btn btn-warning" type="submit"> 
-                Modificar
-                    <i class="fa fa-pencil"></i>
+                {{'ABMLOCALIDADES.MODIFY' | translate}}
+                <i class="fa fa-pencil"></i>
             </button>
         </div>
     </form>
@@ -156,25 +215,33 @@
 <!-- Modal de eliminación de localidades -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-    <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"> Seguro que quiere eliminar? </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body">
-        <form (ngSubmit)="deleteCliente()">
-            <div class="modal-body">
-                    <h3>Seguro que lo quiere borrar?</h3>
-    
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar </button>
-                <button type="button" class="btn btn-danger" type="submit"> Eliminar
-                    <i class="fa fa-trash"></i>
-                </button>
-            </div>
-        </form>
+    <div class="modal-content bg-dark">
+        <div class="modal-header">
+            <h5 class="modal-title text-white" id="exampleModalLabel">
+                {{'ABMLOCALIDADES.SURE' | translate}}
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form (ngSubmit)="deleteCliente()">
+                <div class="modal-body">
+                        <h3 class="text-white">
+                            {{'ABMLOCALIDADES.SUREDELETE' | translate}}
+                        </h3>
+        
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        {{'ABMLOCALIDADES.CLOSE' | translate}}
+                    </button>
+                    <button type="button" class="btn btn-danger" type="submit">
+                        {{'ABMLOCALIDADES.DELETE' | translate}}
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+            </form>
 
+        </div>
     </div>
 </div>
 </div>

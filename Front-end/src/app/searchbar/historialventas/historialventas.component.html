@@ -1,76 +1,112 @@
-<div class="separator"> 
-    Historico de ventas
-</div>
-
-
-<div class="shadow tableMark border border-light">
-    <h1 class="tableTitle text-decoration-underline">
-        Tabla de historial de ventas
-    </h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Cliente</th>
-                <th scope="col">Forma de pago</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Detalles</th>
-            </tr>
-        </thead>
-        <tbody *ngFor="let data of ventas | historialFilter: busquedavalue">
-            <tr>
-                <td scope="row">{{ data.id_venta }}</td>
-                <td>{{ data.cliente }}</td>
-                <td>{{ data.forma_pago }}</td>
-                <td>{{ data.fecha_final }}</td>
-                <td>
-                    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#detailModal" (click)="openModal(data.id_venta)">
-                        <i class="fa fa-eye" aria-hidden="true"></i>
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content bg-dark">
-    <div class="modal-header text-white">
-        <h5 class="modal-title" id="exampleModalLabel"> Detalle de venta </h5>
-        <div>
-            <label for="exampleInputPassword1" class="form-label">Buscar</label>
-            <input  type="text" class="form-control searcher" [(ngModel)]="searcher" (ngModelChange)="filterTable()" id="exampleInputPassword1">
-        </div>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div *ngIf="ventas.length === 0" class="loadingScreen fadeInNav">
+    <div class="spinner-border text-primary" role="status">
     </div>
-    <div class="modal-body">
+    <h3 class="text-white" [class.cargandoText]="lang == 'es'"
+    [class.cargandoTextEng]="lang != 'es'">
+        {{'SELLINGHISTORY.LOADING' | translate}}
+    </h3>
+</div>
+
+
+<div *ngIf="ventas.length !== 0">
+
+    <div class="separator">
+        {{'SELLINGHISTORY.TITLE' | translate}}
+    </div>
+    
+    
+    <div class="shadow tableMark border border-light">
+        <h1 class="tableTitle text-decoration-underline">
+            {{'SELLINGHISTORY.TABLETITLE' | translate}}
+        </h1>
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Producto</th>
-                    <th scope="col">Importe</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Total</th>
+                    <th scope="col">
+                        {{'SELLINGHISTORY.CLIENT' | translate}}
+                    </th>
+                    <th scope="col">
+                        {{'SELLINGHISTORY.PAYMENTMETHOD' | translate}}
+                    </th>
+                    <th scope="col">
+                        {{'SELLINGHISTORY.DATE' | translate}}
+                    </th>
+                    <th scope="col">
+                        {{'SELLINGHISTORY.DETAILS' | translate}}
+                    </th>
                 </tr>
             </thead>
-            <tbody *ngFor="let data of detalleventasfiltered | detalleVentaFilterPipe: searcher">
+            <tbody *ngFor="let data of ventas | historialFilter: busquedavalue">
                 <tr>
-                    <td scope="row">{{ data.id_detalle_venta }}</td>
-                    <td>{{ data.producto }}</td>
-                    <td>{{ data.importe }}</td>
-                    <td>{{ data.cantidad }}</td>
-                    <td>{{ data.importe_r }}</td>
+                    <td scope="row">{{ data.id_venta }}</td>
+                    <td>{{ data.cliente }}</td>
+                    <td>{{ data.forma_pago }}</td>
+                    <td>{{ data.fecha_final }}</td>
+                    <td>
+                        <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#detailModal" (click)="openModal(data.id_venta)">
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>
-
-        
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Cerrar </button>
+    </div>
+    
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark">
+        <div class="modal-header text-white">
+            <h5 class="modal-title" id="exampleModalLabel">
+                {{'SELLINGHISTORY.SELLINGDETAILS' | translate}}
+            </h5>
+            <div>
+                <label for="exampleInputPassword1" class="form-label">
+                    {{'SELLINGHISTORY.SEARCH' | translate}}
+                </label>
+                <input  type="text" class="form-control searcher" [(ngModel)]="searcher" (ngModelChange)="filterTable()" id="exampleInputPassword1">
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">
+                            {{'SELLINGHISTORY.PRODUCT' | translate}}
+                        </th>
+                        <th scope="col">
+                            {{'SELLINGHISTORY.PRICE' | translate}}
+                        </th>
+                        <th scope="col">
+                            {{'SELLINGHISTORY.AMOUNT' | translate}}
+                        </th>
+                        <th scope="col">
+                            {{'SELLINGHISTORY.TOTAL' | translate}}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let data of detalleventasfiltered | detalleVentaFilterPipe: searcher">
+                    <tr>
+                        <td scope="row">{{ data.id_detalle_venta }}</td>
+                        <td>{{ data.producto }}</td>
+                        <td>{{ data.importe }}</td>
+                        <td>{{ data.cantidad }}</td>
+                        <td>{{ data.importe_r }}</td>
+                    </tr>
+                </tbody>
+            </table>
+    
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    {{'SELLINGHISTORY.CLOSE' | translate}}
+                </button>
+            </div>
         </div>
     </div>
+    </div>
+    </div>
 </div>
-</div>
-</div>
+

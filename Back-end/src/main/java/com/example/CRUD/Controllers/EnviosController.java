@@ -1,7 +1,9 @@
 package com.example.CRUD.Controllers;
 
+import com.example.CRUD.DTOs.EnviosDTO;
 import com.example.CRUD.Models.Envios;
 import com.example.CRUD.Services.Interfaces.IEnviosService;
+import com.sun.istack.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +23,7 @@ public class EnviosController
     }
 
     @GetMapping
-    public ResponseEntity<List<Envios>> getEnvios()
+    public ResponseEntity<List<EnviosDTO>> getEnvios()
     {
         return new ResponseEntity<>(srv.getEnvios(), HttpStatus.OK);
     }
@@ -38,8 +40,8 @@ public class EnviosController
         return new ResponseEntity<>(srv.updateEnvios(envios), HttpStatus.OK);
     }
 
-    @DeleteMapping
-    public ResponseEntity<Void> deleteEnvios(@PathVariable int id)
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteEnvios(@PathVariable @NotNull Long id)
     {
         srv.deleteEnvios(id);
         return new ResponseEntity<>(HttpStatus.OK);

@@ -8,7 +8,7 @@ import { MenuComponent } from './searchbar/menu/menu.component';
 import { LocalidadesComponent } from './searchbar/localidades/localidades.component';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { PageNotFoundComponent } from './searchbar/page-not-found/page-not-found.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AboutComponent } from './searchbar/about/about.component';
 import { ClientesFilterPipe } from './Pipes/ClientesFilterPipe';
@@ -25,6 +25,11 @@ import { ProductosTableFilterPipe } from './Pipes/ProductosTableFilterPipe';
 import { HistorialventasComponent } from './searchbar/historialventas/historialventas.component';
 import { HistorialFilterPipe } from './Pipes/HistorialFilterPipe';
 import { detalleVentaFilterPipe } from './Pipes/detalleVentaFilterPipe';
+import { AbmenviosComponent } from './searchbar/abmenvios/abmenvios.component';
+import { EnviosFilterPipe } from './Pipes/EnviosFilterPipe';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { EnvService } from './Services/env.service';
 
 @NgModule({
   declarations: [
@@ -48,15 +53,27 @@ import { detalleVentaFilterPipe } from './Pipes/detalleVentaFilterPipe';
     ProductosTableFilterPipe,
     HistorialventasComponent,
     HistorialFilterPipe,
+    EnviosFilterPipe,
     detalleVentaFilterPipe,
+    AbmenviosComponent,
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (http: HttpClient) => {
+              return new TranslateHttpLoader(http, '', '.json');
+          },
+          deps: [HttpClient],
+      },
+  }),
   ],
-  providers: [],
+  providers: [EnvService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

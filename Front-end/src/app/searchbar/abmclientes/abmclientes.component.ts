@@ -17,6 +17,7 @@ export class AbmclientesComponent implements OnInit {
   telefono = '';
   cp = 0;
   errorTypes = 0;
+  lang = this.appComponent.actualLang();
   @Input() busquedavalue: any;
 
   ngOnInit(): void
@@ -35,9 +36,6 @@ export class AbmclientesComponent implements OnInit {
 
   insertCliente(): void
   {
-    console.log(this.nombre);
-    console.log(this.telefono);
-    console.log(this.cp);
     if (this.nombre === '' || this.nombre === null ) { this.errorTypes = 1; return; }
     if (this.telefono === '' || this.telefono === null ) { this.errorTypes = 2; return; }
     this.http.post(this.appComponent.apiUrl + 'Clientes', {
@@ -117,6 +115,14 @@ export class AbmclientesComponent implements OnInit {
     this.nombre = razon_social;
     this.telefono = telefono;
     this.cp = cp;
+  }
+
+  createOpen(): void
+  {
+    this.id = 0;
+    this.nombre = '';
+    this.telefono = '';
+    this.cp = 0;
   }
 
   deleteOpen(id: any): void

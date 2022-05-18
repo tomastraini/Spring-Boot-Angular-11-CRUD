@@ -12,6 +12,7 @@ export class AbmprovinciasComponent implements OnInit {
   constructor(private appComponent: AppComponent, public http: HttpClient) { }
   @Input() busquedavalue: any;
   provincias: any[] = [];
+  lang = this.appComponent.actualLang();
   response: any;
 
   id_provincia: any;
@@ -50,6 +51,12 @@ export class AbmprovinciasComponent implements OnInit {
   insertProvincia(): void
   {
     let id_max = 0;
+    if(this.provincia == '')
+    {
+      this.errorTypes = 1;
+      return;
+    }
+    
     this.provincias.forEach(element => {
       if (element.id_provincia > id_max)
       {

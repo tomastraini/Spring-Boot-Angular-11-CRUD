@@ -11,7 +11,8 @@ export class AbmproductosComponent implements OnInit {
 
   constructor(private appComponent: AppComponent, public http: HttpClient) { }
   @Input() busquedavalue: any;
-  productos: any[] = [];
+  productos: any;
+  lang = this.appComponent.actualLang();
 
   id_producto: any;
   descripcion: any;
@@ -20,7 +21,7 @@ export class AbmproductosComponent implements OnInit {
   importe: any;
 
   proveedores: any[] = [];
-  id_proveedor: any;
+  id_proveedor = 0;
 
   errorTypes = 0;
 
@@ -42,7 +43,7 @@ export class AbmproductosComponent implements OnInit {
     this.proveedor = '';
     this.stock = '';
     this.importe = '';
-    this.id_proveedor = '';
+    this.id_proveedor = 0;
   }
 
   modifyOpen(id_producto: any, descripcion: any, proveedor: any, stock: any, importe: any): void
@@ -61,6 +62,30 @@ export class AbmproductosComponent implements OnInit {
 
   insertProducto(): void
   {
+    if(this.descripcion == '' || this.descripcion == null || this.descripcion == undefined)
+    {
+      this.errorTypes = 1;
+      return;
+    }
+
+    if(this.id_proveedor == 0 || this.id_proveedor == null || this.id_proveedor == undefined)
+    {
+      this.errorTypes = 2;
+      return;
+    }
+
+    if(this.stock == '' || this.stock == null || this.stock == undefined)
+    {
+      this.errorTypes = 3;
+      return;
+    }
+
+    if(this.importe == '' || this.importe == null || this.importe == undefined)
+    {
+      this.errorTypes = 4;
+      return;
+    }
+
     this.http.post(this.appComponent.apiUrl + 'Productos', {
       descripcion: this.descripcion,
       id_proveedor: this.id_proveedor,
@@ -81,6 +106,30 @@ export class AbmproductosComponent implements OnInit {
 
   modifyProveedor(): void
   {
+    if(this.descripcion == '' || this.descripcion == null || this.descripcion == undefined)
+    {
+      this.errorTypes = 1;
+      return;
+    }
+
+    if(this.id_proveedor == 0 || this.id_proveedor == null || this.id_proveedor == undefined)
+    {
+      this.errorTypes = 2;
+      return;
+    }
+
+    if(this.stock == '' || this.stock == null || this.stock == undefined)
+    {
+      this.errorTypes = 3;
+      return;
+    }
+
+    if(this.importe == '' || this.importe == null || this.importe == undefined)
+    {
+      this.errorTypes = 4;
+      return;
+    }
+    
     this.http.put(this.appComponent.apiUrl + 'Productos/', {
       id_producto: this.id_producto,
       descripcion: this.descripcion,

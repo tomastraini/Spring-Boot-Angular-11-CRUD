@@ -1,6 +1,6 @@
 .tableMark
 {
-    max-width: 80%;
+    max-width: 90%;
     margin-top: 2%;
     margin-bottom: 2%;
     margin-left: auto;
@@ -30,7 +30,7 @@ td
 
 .addButton
 {
-    margin-left: 10%;
+    margin-left: 5%;
     margin-top: 1%;
 }
 
@@ -54,65 +54,14 @@ td
     text-align: center;
 }
 
-.counters
-{
-    display: flex;
-    align-items: center;
-    margin-left: 6%;
-    margin-top: -0.1%;
-}
-
-
-.cabecera
-{
-    max-width: 50%;
-    margin-left: 25%;
-}
-
-.sellingInLine
-{
-    display: flex;
-    align-items: center;
-}
-
-.selectOptionsdiv
-{
-    margin-top: 1%;
-    margin-left: 2%;
-}
-
-.selectOptions
-{
-    min-width: 200%;
-}
-
-.PrecioDiv
-{
-    margin-top: -0.35%;
-    margin-left: 10%;
-}
-
-.cantidadDiv
-{
-    margin-top: -0.35%;
-    margin-left: 2%;
-}
-
-.insertButton
-{
-    margin-left: 10%;
-    margin-bottom: 5%;
-}
-
-@media screen and (max-width: 600px)
-{
+@media only screen and (max-width: 747px) {
     .tableMark
     {
-        max-width: 90%;
+        max-width: 100%;
         margin-top: 2%;
         margin-bottom: 2%;
-        margin-left: auto;
-        margin-right: auto;
+        margin-left: 1%;
+        margin-right: 1%;
         color: white;
         border-radius: 1%;
     }
@@ -128,7 +77,6 @@ td
     {
         font-family: 'Open Sans', sans-serif;
         color: white;
-        font-size: small;
     }
 
     td
@@ -139,7 +87,7 @@ td
 
     .addButton
     {
-        margin-left: 1%;
+        margin-left: 10%;
         margin-top: 1%;
     }
 
@@ -152,9 +100,10 @@ td
 
     .btnModificar
     {
-        margin-left: 5%;
         max-width: 100px;
         max-height: 50px;
+        margin-top: 5%;
+        margin-left: -2%;
     }
 
     .modal-title
@@ -162,63 +111,51 @@ td
         font-family: 'Open Sans', sans-serif;
         text-align: center;
     }
-
-    .cabecera
-    {
-        max-width: 50%;
-        margin-left: 25%;
-    }
-
-    .sellingInLine
-    {
-        display: flex;
-        align-items: center;
-    }
-
-    .selectOptionsdiv
-    {
-        margin-top: -5%;
-        margin-left: 2%;
-    }
-    .counters
-    {
-        display: flex;
-        align-items: center;
-        margin-top: 30%;
-        margin-left: -25%;
-        margin-right: 5%;
-    }
-
-    .selectOptions
-    {
-        min-width: 200%;
-    }
-
-    .PrecioDiv
-    {
-        margin-top: -0.35%;
-        margin-left: 10%;
-    }
-
-    .cantidadDiv
-    {
-        margin-top: -0.35%;
-        margin-left: 2%;
-    }
-
-    .insertButton
-    {
-        margin-left: 10%;
-        margin-bottom: 5%;
-    }
 }
 
-@media screen and (min-width: 1919px)
+@media (max-width: 575px)
 {
-    .counters
+    .tableMark
     {
-        display: flex;
-        align-items: center;
-        margin-left: 6%;
+        max-width: 100%;
+        margin-top: 2%;
+        margin-bottom: 2%;
+        margin-left: 1%;
+        margin-right: 1%;
+        color: white;
+        border-radius: 1%;
+    }
+
+    .tableTitle
+    {
+        text-align: center;
+        font-family: 'Open Sans', sans-serif;
+        color: white;
+    }
+
+    th
+    {
+        font-family: 'Open Sans', sans-serif;
+        color: white;
+    }
+
+    td
+    {
+        font-family: 'Open Sans', sans-serif;
+        color: white;
+        font-size: x-small;
+    }
+
+    .addButton
+    {
+        margin-left: 10%;
+        margin-top: 1%;
+    }
+
+    .btnBorrar
+    {
+        margin-right: 5%;
+        max-width: 100px;
+        max-height: 50px;
     }
 }

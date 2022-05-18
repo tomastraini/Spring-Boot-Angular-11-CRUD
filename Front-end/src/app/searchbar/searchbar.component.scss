@@ -23,3 +23,24 @@
 {
     margin-right: 2%;
 }
+
+// on mobile
+
+@media (max-width: 767px)
+{
+    .closeSession
+    {
+        margin-left: 75%;
+        margin-bottom: 2%;
+    }
+}
+
+.navbar
+{
+    z-index: 1;
+}
+
+.langButton
+{
+    margin-right: 1%;
+}

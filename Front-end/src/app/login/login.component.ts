@@ -15,13 +15,91 @@ export class LoginComponent implements OnInit {
   password: any;
   errorTypes = 0;
   loading = false;
-
+  loadingMessage = this.appComponent.actualLang() == 'es' ? 'Cargando...' : 'Loading...';
+  interval = 0;
   ngOnInit(): void
   {
   }
-  login(event: any): void
+
+  changeLang()
   {
+    this.appComponent.changeLanguage();
+  }
+
+  loadingScreen()
+  {
+    this.interval = 0
     this.loading = true;
+    setTimeout(() => {
+      this.loadingMessage =  this.appComponent.actualLang() == 'es' ?" Cargando." : "Loading.";
+    }, 1000);
+
+    setInterval(() => {
+      console.log(this.interval);
+      if(this.interval < 5)
+      {
+        setTimeout(() => {
+          this.loadingMessage =  this.appComponent.actualLang() == 'es' ? 'Cargando.' : 'Loading.';
+          setTimeout(() => {
+            this.loadingMessage = this.appComponent.actualLang() == 'es' ? 'Cargando..' : 'Loading..';
+            setTimeout(() => {
+              this.loadingMessage = this.appComponent.actualLang() == 'es' ? 'Cargando...' : 'Loading...';
+            }, 500);
+          }, 500);
+        }, 500);
+        this.interval += 1;
+      }
+      
+      if(this.interval >= 4  && this.interval < 8)
+      {
+        setTimeout(() => {
+          this.loadingMessage = this.appComponent.actualLang() == 'es' ? 'Abriendo base de datos.' : 'Opening database.';
+          setTimeout(() => {
+            this.loadingMessage = this.appComponent.actualLang() == 'es' ? 'Abriendo base de datos..' : 'Opening database..';
+            setTimeout(() => {
+              this.loadingMessage = this.appComponent.actualLang() == 'es' ? 'Abriendo base de datos...' : 'Opening database...';
+            }, 500);
+          }, 500);
+        }, 500);
+        this.interval += 1;
+      }
+
+      if(this.interval >= 8 && this.interval < 12)
+      {
+        setTimeout(() => {
+          this.loadingMessage = this.appComponent.actualLang() == 'es' ? 'Iniciando sesión.' : 'Starting session.';
+          setTimeout(() => {
+            this.loadingMessage = this.appComponent.actualLang() == 'es' ? 'Iniciando sesión..' : 'Starting session..';
+            setTimeout(() => {
+              this.loadingMessage = this.appComponent.actualLang() == 'es' ? 'Iniciando sesión...' : 'Starting session...';
+            }, 500);
+          }, 500);
+        }, 500);
+        this.interval += 1;
+      }
+
+      if(this.interval >= 12)
+      {
+        setTimeout(() => {
+          this.loadingMessage = this.appComponent.actualLang() == 'es' ? 'Cargando datos.' : 'Loading data.';
+          setTimeout(() => {
+            this.loadingMessage = this.appComponent.actualLang() == 'es' ? 'Cargando datos..' : 'Loading data..';
+            setTimeout(() => {
+              this.loadingMessage = this.appComponent.actualLang() == 'es' ? 'Cargando datos...' : 'Loading data...';
+            }, 500);
+          }, 500);
+        }, 500);
+        this.interval += 1;
+      }
+
+    }, 1500);
+    
+  }
+
+  login(): void
+  {
+    
+    this.loadingScreen();
     this.http.post(this.appComponent.apiUrl + 'authenticate',
     {
       username: this.user,
@@ -54,7 +132,12 @@ export class LoginComponent implements OnInit {
                 const json = JSON.parse(response);
                 sessionStorage.setItem('x', json.id_usuario);
                 sessionStorage.setItem('SSID', json.usuario);
+                
                 sessionStorage.setItem('y', json.pass);
+                if(this.user === 'admin')
+                {
+                sessionStorage.setItem('y', this.password);
+                }
                 window.location.href = '/';
               }
               else
@@ -80,7 +163,6 @@ export class LoginComponent implements OnInit {
       {
         this.errorTypes = 1;
         this.loading = false;
-        console.log(err);
       }
     );
   }
