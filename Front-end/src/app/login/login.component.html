@@ -1,7 +1,17 @@
 <div class="wrapper fadeInDown">
     <div id="formContent">
       <h2 class="active">  {{ 'LOGINTAB.LOGIN' | translate }} </h2>
-      <button class="btn btn-danger" (click)="changeLang()"> <i class="fa fa-language" aria-hidden="true"></i> </button>
+      <div class="dropdown">
+        <button class="btn btn-danger dropdown-toggle"
+        type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fa fa-language" aria-hidden="true"></i> 
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item text-dark cursor-pointer"  (click)="changeLang('es')">🇪🇸 Spanish</a></li>
+          <li><a class="dropdown-item text-dark cursor-pointer"  (click)="changeLang('en')">🇺🇸 English</a></li>
+          <li><a class="dropdown-item text-dark cursor-pointer"  (click)="changeLang('de')">🇩🇪 Deutsch</a></li>
+        </ul>
+      </div>
   
       <div class="alert alert-danger errorLabel" role="alert" *ngIf="errorTypes !== 0">
         <a *ngIf="errorTypes === 1">

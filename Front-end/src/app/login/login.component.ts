@@ -21,9 +21,9 @@ export class LoginComponent implements OnInit {
   {
   }
 
-  changeLang()
+  changeLang(lang: string)
   {
-    this.appComponent.changeLanguage();
+    this.appComponent.changeLanguage(lang);
   }
 
   loadingScreen()

@@ -17,10 +17,8 @@ export class AppComponent implements OnInit{
   IPsWhitelist: any;
   constructor(private http: HttpClient, private env: EnvService, public translate: TranslateService) { 
         const langFullPath = env.indexPath + env.langPath + env.langDefault;
-        
         this.translate.setDefaultLang(langFullPath);
         this.translates(langFullPath);
-
   }
   translates(lang: string): void {
     this.translate.use(lang);
@@ -95,9 +93,9 @@ export class AppComponent implements OnInit{
 
   }
 
-  changeLanguage()
+  changeLanguage(lang: string)
   {
-    this.env.langDefault = this.env.langDefault === 'es' ? 'en' : 'es';
+    this.env.langDefault = this.env.langDefault = lang;
     sessionStorage.setItem('lang', this.env.langDefault);
     window.location.reload();
   }
