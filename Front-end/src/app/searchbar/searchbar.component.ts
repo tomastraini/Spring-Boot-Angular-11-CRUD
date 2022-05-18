@@ -43,9 +43,9 @@ export class SearchbarComponent implements OnInit {
     this.view = this.router.url.replace(/^\/|\/$/g, '');
   }
 
-  changeLang()
+  changeLang(lang: string)
   {
-    this.appComponent.changeLanguage();
+    this.appComponent.changeLanguage(lang);
   }
 
   goAbout(): void

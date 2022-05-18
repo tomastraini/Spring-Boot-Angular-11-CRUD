@@ -46,9 +46,17 @@
             </a>
             </li>
         </ul>
-        <button class="btn btn-danger langButton" (click)="changeLang()"> 
-          <i class="fa fa-language" aria-hidden="true"></i> 
-        </button>
+        <div class="dropdown langButton">
+            <button class="btn btn-danger dropdown-toggle"
+            type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa fa-language" aria-hidden="true"></i> 
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item text-dark cursor-pointer"  (click)="changeLang('es')">🇪🇸 Spanish</a></li>
+              <li><a class="dropdown-item text-dark cursor-pointer"  (click)="changeLang('en')">🇺🇸 English</a></li>
+              <li><a class="dropdown-item text-dark cursor-pointer"  (click)="changeLang('de')">🇩🇪 Deutsch</a></li>
+            </ul>
+          </div>
 
         <button class="btn btn-danger mr-2 closeSession" (click)="cerrarSession()">
             {{ 'MENU.LOGOUT' | translate}}
